@@ -1,0 +1,1670 @@
+﻿
+@* <!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] ?? "Веб-приложение")</title>
+
+    <!-- Шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-1: #1c41b0;
+            --primary-2: #8aa2ec;
+            --primary-3: #f1f5fe;
+            --primary-6: #8aa3ed;
+            --primary-7: #153084;
+            --primary-4: #822828;
+            --primary-5: #cf6363;
+            --card-radius: 14px;
+            --max-width: 1100px;
+            --font-size: 1rem;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            background: var(--primary-3);
+            color: #0b0b0b;
+            font-size: var(--font-size, 1rem);
+        }
+
+            body.font-large {
+                --font-size: 1.7rem;
+            }
+
+        .font-size-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1050;
+        }
+
+        .site-navbar {
+            background: linear-gradient(80deg, var(--primary-1) 20%, var(--primary-6) 70%);
+            box-shadow: 0 1px 0 rgba(11,11,11,0.04);
+        }
+
+        .site-brand {
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* ЧЕРНЫЙ ТЕКСТ МЕНЮ */
+        .nav-link {
+            color: #000 !important;
+        }
+
+        .dropdown-item {
+            color: #000;
+        }
+
+        .nav-link:hover {
+            opacity: 0.75;
+        }
+
+        footer.site-footer {
+            padding: 2rem 1rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: .9rem;
+        }
+    </style>
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+
+    <!-- Переключатель размера -->
+    <div class="font-size-toggle btn-group btn-group-sm">
+        <button id="fontNormal" class="btn btn-outline-primary">Стандартный</button>
+        <button id="fontLarge" class="btn btn-outline-primary">Увеличенный</button>
+    </div>
+
+    <!-- ШАПКА -->
+    <header class="site-navbar">
+        <nav class="container navbar navbar-expand-lg navbar-light">
+
+            <a class="navbar-brand site-brand" asp-page="/Index">
+                Центр общения старшего поколения
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                    <!-- О нас -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/CenterInfo">О нас</a>
+                    </li>
+
+                    <!-- Мероприятия -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/Meropriatia">Мероприятия</a>
+                    </li>
+
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Разделы
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+                            <li>
+                                <a class="dropdown-item" asp-page="/Account/News">Новости</a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" asp-page="/Account/HobbyTest">Тест</a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" asp-page="/Account/AntiMoshenniki">
+                                    Противодействие мошенникам
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Контент -->
+    <main role="main" class="mb-5">
+        @RenderBody()
+    </main>
+
+    <!-- Футер -->
+    <footer class="site-footer">
+        <div class="container">
+            <small>&copy; @(DateTime.Now.Year) Центр общения старшего поколения</small>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const btnNormal = document.getElementById('fontNormal');
+            const btnLarge = document.getElementById('fontLarge');
+
+            if (localStorage.getItem('fontSize') === 'large') {
+                body.classList.add('font-large');
+            }
+
+            btnNormal.addEventListener('click', () => {
+                body.classList.remove('font-large');
+                localStorage.setItem('fontSize', 'normal');
+            });
+
+            btnLarge.addEventListener('click', () => {
+                body.classList.add('font-large');
+                localStorage.setItem('fontSize', 'large');
+            });
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+
+
+ *@
+
+
+@* <!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] ?? "Веб-приложение")</title>
+
+    <!-- Шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-1: #1c41b0;
+            --primary-2: #8aa2ec;
+            --primary-3: #f1f5fe;
+            --primary-6: #8aa3ed;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            background: var(--primary-3);
+            color: #0b0b0b;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+            /* =========================
+                   🔥 РЕЖИМ СЛАБОЕ ЗРЕНИЕ
+                ========================= */
+            body.font-large {
+                font-size: 1.25rem;
+                line-height: 1.7;
+            }
+
+                /* =========================
+                   ШРИФТЫ (ПРАВИЛЬНОЕ МАСШТАБИРОВАНИЕ)
+                ========================= */
+                body.font-large h1 {
+                    font-size: 2.6rem !important;
+                }
+
+                body.font-large h2 {
+                    font-size: 2.2rem !important;
+                }
+
+                body.font-large h3 {
+                    font-size: 1.9rem !important;
+                }
+
+                body.font-large h4 {
+                    font-size: 1.6rem !important;
+                }
+
+                body.font-large h5 {
+                    font-size: 1.4rem !important;
+                }
+
+                body.font-large h6 {
+                    font-size: 1.2rem !important;
+                }
+
+                body.font-large p,
+                body.font-large li,
+                body.font-large a,
+                body.font-large span,
+                body.font-large div {
+                    font-size: 1.1em;
+                }
+
+                body.font-large .card-text {
+                    font-size: 1.1em;
+                }
+
+                body.font-large .btn {
+                    font-size: 1.1em;
+                }
+
+        /* =========================
+                   КНОПКА
+                ========================= */
+        .font-size-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1050;
+        }
+
+        /* =========================
+                   ШАПКА
+                ========================= */
+        .site-navbar {
+            background: linear-gradient(80deg, var(--primary-1) 20%, var(--primary-6) 70%);
+        }
+
+        .site-brand {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .nav-link {
+            color: #000 !important;
+        }
+
+        .dropdown-item {
+            color: #000;
+        }
+
+        .nav-link:hover {
+            opacity: 0.75;
+        }
+
+        footer.site-footer {
+            padding: 2rem 1rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: .9rem;
+        }
+    </style>
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+
+    <!-- 🔘 КНОПКИ -->
+    <div class="font-size-toggle btn-group btn-group-sm">
+        <button id="fontNormal" class="btn btn-outline-primary">Стандартный</button>
+        <button id="fontLarge" class="btn btn-outline-primary">Увеличенный</button>
+    </div>
+
+    <!-- 🔷 ШАПКА -->
+    <header class="site-navbar">
+        <nav class="container navbar navbar-expand-lg navbar-light">
+
+            <a class="navbar-brand site-brand" asp-page="/Index">
+                Центр общения старшего поколения
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/CenterInfo">О нас</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/Meropriatia">Мероприятия</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Разделы
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" asp-page="/Account/News">Новости</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/HobbyTest">Тест</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/AntiMoshenniki">Противодействие мошенникам</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- КОНТЕНТ -->
+    <main role="main" class="mb-5">
+        @RenderBody()
+    </main>
+
+    <!-- ФУТЕР -->
+    <footer class="site-footer">
+        <div class="container">
+            <small>&copy; @(DateTime.Now.Year) Центр общения старшего поколения</small>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const body = document.body;
+            const btnNormal = document.getElementById('fontNormal');
+            const btnLarge = document.getElementById('fontLarge');
+
+            function setMode(mode) {
+                if (mode === 'large') {
+                    body.classList.add('font-large');
+                } else {
+                    body.classList.remove('font-large');
+                }
+                localStorage.setItem('fontSize', mode);
+            }
+
+            btnNormal.addEventListener('click', () => setMode('normal'));
+            btnLarge.addEventListener('click', () => setMode('large'));
+
+            // восстановление режима
+            if (localStorage.getItem('fontSize') === 'large') {
+                body.classList.add('font-large');
+            }
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html> *@
+
+
+
+
+
+
+
+@* <!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] ?? "Веб-приложение")</title>
+
+    <!-- ШРИФТ -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-1: #1c41b0;
+            --primary-6: #8aa3ed;
+            --primary-3: #f1f5fe;
+        }
+
+        /* =========================
+                   БАЗОВЫЙ СТИЛЬ
+                ========================= */
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+            background: var(--primary-3);
+            color: #0b0b0b;
+            font-size: 16px;
+        }
+
+            /* =========================
+                   РЕЖИМ СЛАБОГО ЗРЕНИЯ
+                   (ПОЛНОЕ УВЕЛИЧЕНИЕ)
+                ========================= */
+            body.font-large {
+                font-size: 20px !important;
+            }
+
+                /* ВСЁ НАСЛЕДУЕТ РАЗМЕР */
+                body.font-large * {
+                    font-size: inherit !important;
+                    line-height: 1.7 !important;
+                }
+
+                /* МЕНЮ */
+                body.font-large .nav-link {
+                    font-size: 1.3rem !important;
+                    font-weight: 600;
+                }
+
+                body.font-large .dropdown-item {
+                    font-size: 1.2rem !important;
+                }
+
+                body.font-large .navbar-brand {
+                    font-size: 1.6rem !important;
+                    font-weight: 700;
+                }
+
+                /* КНОПКИ */
+                body.font-large .btn {
+                    font-size: 1.2rem !important;
+                }
+
+                /* ЗАГОЛОВКИ */
+                body.font-large h1 {
+                    font-size: 2.8rem !important;
+                }
+
+                body.font-large h2 {
+                    font-size: 2.4rem !important;
+                }
+
+                body.font-large h3 {
+                    font-size: 2rem !important;
+                }
+
+                body.font-large h4 {
+                    font-size: 1.7rem !important;
+                }
+
+                body.font-large h5 {
+                    font-size: 1.5rem !important;
+                }
+
+        /* =========================
+                   КНОПКА РЕЖИМА
+                ========================= */
+        .font-size-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+        }
+
+        /* =========================
+                   ШАПКА
+                ========================= */
+        .site-navbar {
+            background: linear-gradient(80deg, var(--primary-1), var(--primary-6));
+        }
+
+        .site-brand {
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-link {
+            color: #000 !important;
+        }
+
+        .dropdown-item {
+            color: #000;
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: #6b7280;
+        }
+    </style>
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+
+    <!-- КНОПКА -->
+    <div class="font-size-toggle btn-group btn-group-sm">
+        <button id="fontNormal" class="btn btn-outline-primary">Стандартный</button>
+        <button id="fontLarge" class="btn btn-outline-primary">Увеличенный</button>
+    </div>
+
+    <!-- ШАПКА -->
+    <header class="site-navbar">
+        <nav class="container navbar navbar-expand-lg navbar-light">
+
+            <a class="navbar-brand site-brand" asp-page="/Index">
+                Центр общения старшего поколения
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/CenterInfo">О нас</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/Meropriatia">Мероприятия</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            Разделы
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-page="/Account/News">Новости</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/HobbyTest">Тест</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/AntiMoshenniki">Противодействие мошенникам</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- КОНТЕНТ -->
+    <main class="container mt-3">
+        @RenderBody()
+    </main>
+
+    <!-- ФУТЕР -->
+    <footer>
+        &copy; @(DateTime.Now.Year) Центр общения старшего поколения
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const body = document.body;
+
+            const btnNormal = document.getElementById('fontNormal');
+            const btnLarge = document.getElementById('fontLarge');
+
+            function setMode(mode) {
+                if (mode === 'large') {
+                    body.classList.add('font-large');
+                } else {
+                    body.classList.remove('font-large');
+                }
+                localStorage.setItem('fontSize', mode);
+            }
+
+            btnNormal.addEventListener('click', () => setMode('normal'));
+            btnLarge.addEventListener('click', () => setMode('large'));
+
+            // восстановление
+            if (localStorage.getItem('fontSize') === 'large') {
+                body.classList.add('font-large');
+            }
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html> *@
+
+@* <!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] ?? "Веб-приложение")</title>
+
+    <!-- ШРИФТ -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+
+        :root {
+            --primary-1: #1c41b0;
+            --primary-6: #8aa3ed;
+            --bg: #f1f5fe;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Inter", Arial;
+            background: var(--bg);
+        }
+
+        /* =========================
+                   FULL SCREEN LAYOUT
+                ========================= */
+
+        main {
+            width: 100%;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* центрированный контент (как у банков) */
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* =========================
+                   HEADER
+                ========================= */
+
+        .site-navbar {
+            background: linear-gradient(90deg, var(--primary-1), var(--primary-6));
+        }
+
+        .site-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+
+        .dropdown-item {
+            color: #000;
+        }
+
+        /* =========================
+                   FOOTER
+                ========================= */
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        /* =========================
+                   ACCESSIBILITY (масштаб)
+                ========================= */
+
+        body.font-large {
+            font-size: 20px !important;
+        }
+
+            body.font-large * {
+                line-height: 1.7 !important;
+            }
+
+            body.font-large h1 {
+                font-size: 2.8rem !important;
+            }
+
+            body.font-large h2 {
+                font-size: 2.4rem !important;
+            }
+
+            body.font-large h3 {
+                font-size: 2rem !important;
+            }
+
+            body.font-large h4 {
+                font-size: 1.7rem !important;
+            }
+
+            body.font-large h5 {
+                font-size: 1.5rem !important;
+            }
+
+            body.font-large .nav-link {
+                font-size: 1.3rem !important;
+            }
+
+            body.font-large .btn {
+                font-size: 1.2rem !important;
+            }
+
+        /* кнопка */
+        .font-size-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- кнопка масштаба -->
+    <div class="font-size-toggle btn-group btn-group-sm">
+        <button id="fontNormal" class="btn btn-outline-primary">Стандартный</button>
+        <button id="fontLarge" class="btn btn-outline-primary">Увеличенный</button>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-navbar">
+        <nav class="container navbar navbar-expand-lg">
+
+            <a class="navbar-brand site-brand" asp-page="/Index">
+                Центр общения старшего поколения
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/CenterInfo">О нас</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/Meropriatia">Мероприятия</a>
+                    </li>
+
+                  
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            Разделы
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" asp-page="/Account/HobbyTest">Тест</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/AntiMoshenniki">Безопасность</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/News">Новости</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- MAIN (ВОТ ТУТ FULL SCREEN РЕШЕНИЕ) -->
+    <main>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        © @DateTime.Now.Year Центр общения старшего поколения
+    </footer>
+
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SCALE SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const body = document.body;
+
+            const normal = document.getElementById('fontNormal');
+            const large = document.getElementById('fontLarge');
+
+            function set(mode) {
+                if (mode === 'large') {
+                    body.classList.add('font-large');
+                } else {
+                    body.classList.remove('font-large');
+                }
+                localStorage.setItem('font', mode);
+            }
+
+            normal.addEventListener('click', () => set('normal'));
+            large.addEventListener('click', () => set('large'));
+
+            if (localStorage.getItem('font') === 'large') {
+                body.classList.add('font-large');
+            }
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html> *@
+
+@* <!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] ?? "Веб-приложение")</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+
+        :root {
+            --primary-1: #1c41b0;
+            --primary-6: #8aa3ed;
+            --bg: #f1f5fe;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Inter", Arial;
+            background: var(--bg);
+        }
+
+        /* =========================
+                   FULL SCREEN
+                ========================= */
+
+        main {
+            width: 100%;
+            min-height: calc(100vh - 120px);
+        }
+
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* =========================
+                   HEADER
+                ========================= */
+
+        .site-navbar {
+            background: linear-gradient(90deg, var(--primary-1), var(--primary-6));
+        }
+
+        .site-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+
+        /* 🔥 ВОТ ГЛАВНОЕ ИСПРАВЛЕНИЕ */
+        .nav-link {
+            color: #000 !important;
+            font-weight: 500;
+        }
+
+            .nav-link:hover {
+                color: #1c41b0 !important;
+            }
+
+        .dropdown-item {
+            color: #000;
+        }
+
+            .dropdown-item:hover {
+                background: #f1f5fe;
+                color: #1c41b0;
+            }
+
+        /* =========================
+                   FOOTER
+                ========================= */
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        /* =========================
+                   FONT SCALE
+                ========================= */
+
+        body.font-large {
+            font-size: 20px !important;
+        }
+
+            body.font-large * {
+                line-height: 1.7 !important;
+            }
+
+            body.font-large h1 {
+                font-size: 2.8rem !important;
+            }
+
+            body.font-large h2 {
+                font-size: 2.4rem !important;
+            }
+
+            body.font-large h3 {
+                font-size: 2rem !important;
+            }
+
+            body.font-large h4 {
+                font-size: 1.7rem !important;
+            }
+
+            body.font-large h5 {
+                font-size: 1.5rem !important;
+            }
+
+            body.font-large .nav-link {
+                font-size: 1.3rem !important;
+            }
+
+            body.font-large .btn {
+                font-size: 1.2rem !important;
+            }
+
+        /* кнопка масштаба */
+        .font-size-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- кнопка -->
+    <div class="font-size-toggle btn-group btn-group-sm">
+        <button id="fontNormal" class="btn btn-outline-primary">Стандартный</button>
+        <button id="fontLarge" class="btn btn-outline-primary">Увеличенный</button>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-navbar">
+        <nav class="container navbar navbar-expand-lg">
+
+            <a class="navbar-brand site-brand" asp-page="/Index">
+                Центр общения старшего поколения
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/CenterInfo">О нас</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/Meropriatia">Мероприятия</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            Разделы
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" asp-page="/Account/HobbyTest">Тест</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/AntiMoshenniki">Безопасность</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/News">Новости</a></li>
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        © @DateTime.Now.Year Центр общения старшего поколения
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const body = document.body;
+
+            const normal = document.getElementById('fontNormal');
+            const large = document.getElementById('fontLarge');
+
+            function set(mode) {
+                if (mode === 'large') {
+                    body.classList.add('font-large');
+                } else {
+                    body.classList.remove('font-large');
+                }
+                localStorage.setItem('font', mode);
+            }
+
+            normal.addEventListener('click', () => set('normal'));
+            large.addEventListener('click', () => set('large'));
+
+            if (localStorage.getItem('font') === 'large') {
+                body.classList.add('font-large');
+            }
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html> *@
+
+
+@* <!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] ?? "Веб-приложение")</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+
+        :root {
+            --primary-1: #1c41b0;
+            --primary-6: #8aa3ed;
+            --bg: #f1f5fe;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Inter", Arial;
+            background: var(--bg);
+        }
+
+        main {
+            width: 100%;
+            min-height: calc(100vh - 120px);
+        }
+
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* =========================
+                           HEADER
+                ========================= */
+
+        .site-navbar {
+            background: linear-gradient(90deg, var(--primary-1), var(--primary-6));
+        }
+
+        .site-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: #000 !important;
+            font-weight: 500;
+        }
+
+            .nav-link:hover {
+                color: #1c41b0 !important;
+            }
+
+        .dropdown-item {
+            color: #000;
+        }
+
+            .dropdown-item:hover {
+                background: #f1f5fe;
+                color: #1c41b0;
+            }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        /* =========================
+                           FONT SCALE BASE
+                ========================= */
+
+        body.font-large {
+            font-size: 22px !important; 
+         
+        }
+
+            body.font-large * {
+                line-height: 1.7 !important;
+            }
+
+            body.font-large h1 {
+                font-size: 2.8rem !important;
+            }
+
+            body.font-large h2 {
+                font-size: 2.4rem !important;
+            }
+
+            body.font-large h3 {
+                font-size: 2rem !important;
+            }
+
+            body.font-large h4 {
+                font-size: 1.7rem !important;
+            }
+
+            body.font-large h5 {
+                font-size: 1.5rem !important;
+            }
+
+            body.font-large .nav-link {
+                font-size: 1.3rem !important;
+            }
+
+            body.font-large .btn {
+                font-size: 1.2rem !important;
+            }
+
+            /* =========================
+                   FIX HERO / TEXT (ВАЖНО)
+                ========================= */
+
+            body.font-large .hero-modern h1 {
+                font-size: 3.2rem !important;
+            }
+
+            body.font-large .hero-modern p {
+                font-size: 1.5rem !important;
+            }
+
+            body.font-large .section-title {
+                font-size: 2.3rem !important;
+            }
+
+            body.font-large .section-body p {
+                font-size: 1.2rem !important;
+            }
+
+            body.font-large .section-body h5 {
+                font-size: 1.6rem !important;
+            }
+
+            body.font-large .profile-card h5 {
+                font-size: 1.6rem !important;
+            }
+
+            body.font-large .profile-card p {
+                font-size: 1.2rem !important;
+            }
+
+            body.font-large .btn-modern {
+                font-size: 1.2rem !important;
+                padding: 12px 18px !important;
+            }
+
+        /* кнопка масштаба */
+        .font-size-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- кнопка масштаба -->
+    <div class="font-size-toggle btn-group btn-group-sm">
+        <button id="fontNormal" class="btn btn-outline-primary">Стандартный</button>
+        <button id="fontLarge" class="btn btn-outline-primary">Увеличенный</button>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-navbar">
+        <nav class="container navbar navbar-expand-lg">
+
+            <a class="navbar-brand site-brand" asp-page="/Index">
+                Центр общения старшего поколения
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/CenterInfo">О нас</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/Meropriatia">Мероприятия</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            Разделы
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" asp-page="/Account/HobbyTest">Тест</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/AntiMoshenniki">Безопасность</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/News">Новости</a></li>
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        © @DateTime.Now.Year Центр общения старшего поколения
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const body = document.body;
+
+            const normal = document.getElementById('fontNormal');
+            const large = document.getElementById('fontLarge');
+
+            function set(mode) {
+                if (mode === 'large') {
+                    body.classList.add('font-large');
+                } else {
+                    body.classList.remove('font-large');
+                }
+                localStorage.setItem('font', mode);
+            }
+
+            normal.addEventListener('click', () => set('normal'));
+            large.addEventListener('click', () => set('large'));
+
+            if (localStorage.getItem('font') === 'large') {
+                body.classList.add('font-large');
+            }
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+
+
+ *@
+
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] ?? "Веб-приложение")</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+
+        :root {
+            --primary-1: #1c41b0;
+            --primary-6: #8aa3ed;
+            --bg: #f1f5fe;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Inter", Arial;
+            background: var(--bg);
+            transition: font-size 0.2s ease, transform 0.2s ease;
+        }
+
+        main {
+            width: 100%;
+            min-height: calc(100vh - 120px);
+        }
+
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ========================= HEADER ========================= */
+
+        .site-navbar {
+            background: linear-gradient(90deg, var(--primary-1), var(--primary-6));
+        }
+
+        .site-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: #000 !important;
+            font-weight: 500;
+        }
+
+            .nav-link:hover {
+                color: #1c41b0 !important;
+            }
+
+        .dropdown-item:hover {
+            background: #f1f5fe;
+            color: #1c41b0;
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        /* =========================
+                   МАСШТАБ (ПРАВИЛЬНЫЙ)
+                ========================= */
+
+        /* Обычный */
+        body {
+            font-size: 18px;
+        }
+
+            /* КРУПНЫЙ */
+            body.font-medium {
+                font-size: 21px;
+            }
+
+            /* ОЧЕНЬ КРУПНЫЙ (≈ 1.35x) */
+            body.font-large {
+                font-size: 24px;
+            }
+
+            /* Общая читаемость */
+            body.font-medium,
+            body.font-large {
+                line-height: 1.7;
+            }
+
+                /* Заголовки */
+                body.font-medium h1 {
+                    font-size: 2.2em !important;
+                }
+
+                body.font-medium h2 {
+                    font-size: 1.9em !important;
+                }
+
+                body.font-medium h3 {
+                    font-size: 1.6em !important;
+                }
+
+                body.font-large h1 {
+                    font-size: 2.6em !important;
+                }
+
+                body.font-large h2 {
+                    font-size: 2.2em !important;
+                }
+
+                body.font-large h3 {
+                    font-size: 1.8em !important;
+                }
+
+                /* текст */
+                body.font-medium p,
+                body.font-medium li {
+                    font-size: 1.05em !important;
+                }
+
+                body.font-large p,
+                body.font-large li {
+                    font-size: 1.15em !important;
+                }
+
+                /* кнопки */
+             /*    body.font-medium .btn {
+                    font-size: 1.05rem !important;
+                }
+
+                body.font-large .btn {
+                    font-size: 1.15rem !important;
+                } */
+                /* кнопки (кроме переключателя масштаба) */
+                body.font-medium .btn:not(.font-size-toggle .btn) {
+                    font-size: 1.05rem !important;
+                }
+
+                body.font-large .btn:not(.font-size-toggle .btn) {
+                    font-size: 1.15rem !important;
+                }
+
+                /* меню */
+                body.font-medium .nav-link {
+                    font-size: 1.05rem !important;
+                }
+
+                body.font-large .nav-link {
+                    font-size: 1.15rem !important;
+                }
+
+        /* кнопка переключения */
+        .font-size-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+            width: 180px; /* фиксируем компактный размер */
+        }
+
+        /* убираем визуальный зазор */
+        .btn-no-gap {
+            margin-top: -2px; /* убирает линию/разрыв между блоками */
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        /* кнопки размера текста */
+
+.font-btn-small {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.font-btn-medium {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.font-btn-large {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+       
+    </style>
+</head>
+
+<body>
+
+    
+
+    <!-- КНОПКИ МАСШТАБА -->
+    <div class="font-size-toggle">
+
+        <div class="btn-group btn-group-sm d-flex gap-0">
+            <button id="fontNormal" class="btn btn-outline-primary w-50 font-btn-small"> А </button>
+            <button id="fontMedium" class="btn btn-outline-primary w-50  font-btn-medium"> А+ </button>
+        </div>
+
+        <button id="fontLarge" class="btn btn-outline-primary w-100 btn-no-gap font-btn-large">
+              АА+
+        </button>
+
+    </div>
+
+
+    <!-- HEADER -->
+    <header class="site-navbar">
+        <nav class="container navbar navbar-expand-lg">
+
+            <a class="navbar-brand site-brand" asp-page="/Index">
+                Центр общения старшего поколения
+            </a>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/CenterInfo">О центре</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/Meropriatia">Мероприятия</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            Разделы
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" asp-page="/Account/HobbyTest">Тест</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/AntiMoshenniki">Безопасность</a></li>
+                            <li><a class="dropdown-item" asp-page="/Account/News">Новости</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        © @DateTime.Now.Year Центр общения старшего поколения
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- МАСШТАБ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const body = document.body;
+           
+
+            const normal = document.getElementById('fontNormal');
+            const medium = document.getElementById('fontMedium');
+            const large = document.getElementById('fontLarge');
+
+            function set(mode) {
+                body.classList.remove('font-medium', 'font-large');
+
+                if (mode === 'medium') {
+                    body.classList.add('font-medium');
+                }
+
+                if (mode === 'large') {
+                    body.classList.add('font-large');
+                }
+
+
+
+                localStorage.setItem('font', mode);
+            }
+
+            normal.addEventListener('click', () => set('normal'));
+            medium.addEventListener('click', () => set('medium'));
+            large.addEventListener('click', () => set('large'));
+
+            const saved = localStorage.getItem('font') || 'normal';
+            set(saved);
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

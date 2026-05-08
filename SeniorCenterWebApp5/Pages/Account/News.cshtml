@@ -1,0 +1,1047 @@
+﻿@* @page
+@model SeniorCenterWebApp.Pages.Account.NewsModel
+
+<h2>Новости</h2>
+
+<!-- Фильтр как у мероприятий -->
+<form method="get">
+    <label>Фильтр по типу:</label>
+
+    <select asp-for="SelectedCategory">
+        <option>Все</option>
+
+        @foreach (var cat in Model.Categories)
+        {
+            <option value="@cat">@cat</option>
+        }
+    </select>
+
+    <button type="submit">Применить</button>
+</form>
+
+<br />
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Фото</th>
+            <th>Дата</th>
+            <th>Тип</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var news in Model.NewsList)
+        {
+            <tr>
+                <td>@news.Title</td>
+
+                <td>@news.Description</td>
+
+                <td>
+                    @if (!string.IsNullOrEmpty(news.ImageUrl))
+                    {
+                        <img src="@news.ImageUrl" width="120" />
+                    }
+                </td>
+
+                <td>@news.PublishDate.ToShortDateString()</td>
+
+                <td>@news.Category</td>
+            </tr>
+        }
+    </tbody>
+</table> *@
+
+@* @page
+@model SeniorCenterWebApp.Pages.Account.NewsModel
+
+<style>
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .header h1 {
+            font-size: 36px;
+        }
+
+        .header p {
+            color: gray;
+        }
+
+    .layout {
+        display: flex;
+        gap: 20px;
+    }
+
+    /* ЛЕВАЯ КОЛОНКА */
+    .categories {
+        width: 250px;
+        border-right: 1px solid #ccc;
+        padding-right: 15px;
+    }
+
+    .category-link {
+        display: block;
+        margin-bottom: 10px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .category-link:hover {
+            text-decoration: underline;
+        }
+
+    /* ПРАВАЯ КОЛОНКА */
+    .news-container {
+        flex: 1;
+    }
+
+    .news-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #fafafa;
+    }
+
+        .news-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+    .search-box {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="header">
+    <h1>Новости</h1>
+    <p>Актуальная информация для старшего поколения Саратовской области</p>
+</div>
+
+<div class="search-box">
+    <form method="get">
+        <input type="text" name="Search" placeholder="Поиск..." />
+        <button type="submit">Найти</button>
+    </form>
+</div>
+
+<div class="layout">
+
+    <!-- КАТЕГОРИИ СЛЕВА -->
+    <div class="categories">
+        <h4>Категории</h4>
+
+        <a class="category-link" href="/Account/News">Все</a>
+
+        @foreach (var cat in Model.Categories)
+        {
+            <a class="category-link"
+               href="/Account/News?SelectedCategory=@cat">
+                @cat
+            </a>
+        }
+    </div>
+
+    <!-- НОВОСТИ СПРАВА -->
+    <div class="news-container">
+
+        @foreach (var news in Model.NewsList)
+        {
+            <div class="news-card">
+
+                <h3>@news.Title</h3>
+
+                <small>@news.PublishDate.ToShortDateString()</small>
+
+                <p>@news.Description</p>
+
+                @if (!string.IsNullOrEmpty(news.ImageUrl))
+                {
+                    <img src="@news.ImageUrl" />
+                }
+
+                <p><b>Категория:</b> @news.Category</p>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+ *@
+
+@* @page
+@model SeniorCenterWebApp.Pages.Account.NewsModel
+
+<style>
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .header h1 {
+            font-size: 36px;
+        }
+
+        .header p {
+            color: gray;
+        }
+
+    /* ОБЩИЙ ЛЕЙАУТ */
+    .layout {
+        display: flex;
+        gap: 20px;
+    }
+
+    /* КАТЕГОРИИ */
+ 
+    .categories {
+        width: 250px;
+        background-color: #0d6efd; /* синий фон */
+        border-radius: 10px;
+        padding: 15px;
+        color: white;
+    }
+
+        .categories h4 {
+            color: white;
+            margin-top: 0;
+        }
+
+    /* ссылки */
+    .category-link {
+        display: block;
+        margin-bottom: 10px;
+        color: white;
+        text-decoration: none;
+        padding: 6px 8px;
+        border-radius: 5px;
+    }
+
+        .category-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+    /* НОВОСТИ */
+    .news-container {
+        flex: 1;
+    }
+
+    /* КАРТОЧКА НОВОСТИ */
+    .news-card {
+        display: flex;
+        gap: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #fafafa;
+        align-items: flex-start;
+    }
+
+        .news-card img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+    .news-content {
+        flex: 1;
+    }
+
+        .news-content h3 {
+            margin-top: 0;
+        }
+
+        .news-content p {
+            margin: 5px 0;
+        }
+
+    /* ПОИСК */
+    .search-box {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="header">
+    <h1>Новости</h1>
+    <p>Актуальная информация для старшего поколения Саратовской области</p>
+</div>
+
+<div class="search-box">
+    <form method="get">
+        <input type="text" name="Search" placeholder="Поиск..." />
+        <button type="submit">Найти</button>
+    </form>
+</div>
+
+<div class="layout">
+
+    <!-- КАТЕГОРИИ -->
+    <div class="categories">
+        <h4>Категории</h4>
+
+        <a class="category-link" href="/Account/News">Все</a>
+
+        @foreach (var cat in Model.Categories)
+        {
+            <a class="category-link" href="/Account/News?SelectedCategory=@cat">
+                @cat
+            </a>
+        }
+    </div>
+
+    <!-- НОВОСТИ -->
+    <div class="news-container">
+
+        @foreach (var news in Model.NewsList)
+        {
+            <div class="news-card">
+
+                @if (!string.IsNullOrEmpty(news.ImageUrl))
+                {
+                    <img src="@news.ImageUrl" />
+                }
+
+                <div class="news-content">
+                    <h3>@news.Title</h3>
+                    <small>@news.PublishDate.ToShortDateString()</small>
+                    <p>@news.Description</p>
+                    <p><b>Категория:</b> @news.Category</p>
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div> *@
+@* 
+@page
+@model SeniorCenterWebApp.Pages.Account.NewsModel
+
+<style>
+    /* HEADER как в мероприятиях */
+    .header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #42a5f5;
+        }
+
+        .header p {
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+
+    /* ЛЕЙАУТ */
+    .layout {
+        display: flex;
+        gap: 25px;
+    }
+
+    /* КАТЕГОРИИ (как карточка) */
+    .categories {
+        width: 260px;
+        background-color: #ffffff;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+        .categories h4 {
+            color: #42a5f5;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+    .category-link {
+        display: block;
+        margin-bottom: 10px;
+        color: #0d6efd;
+        text-decoration: none;
+        padding: 8px 10px;
+        border-radius: 8px;
+        transition: 0.2s;
+        font-size: 1.05rem;
+    }
+
+        .category-link:hover {
+            background-color: #e3f2fd;
+            color: #1e88e5;
+        }
+
+    /* НОВОСТИ */
+    .news-container {
+        flex: 1;
+    }
+
+    /* КАРТОЧКА */
+    .news-card {
+        display: flex;
+        gap: 20px;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        align-items: stretch;
+    }
+
+    /* ОБЛАСТЬ КАРТИНКИ */
+    .news-img-wrapper {
+        width: 300px;
+        height: 300px;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .news-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    /* КОНТЕНТ */
+    .news-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .news-content h3 {
+            margin-top: 0;
+            color: #42a5f5;
+            font-weight: 600;
+        }
+
+        .news-content small {
+            color: #6c757d;
+        }
+
+        .news-content p {
+            margin: 6px 0;
+            font-size: 1.05rem;
+        }
+
+    /* ПОИСК */
+    .search-box {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+        .search-box input {
+            width: 300px;
+            padding: 10px;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .search-box button {
+            padding: 10px 20px;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            border: none;
+            background-color: #42a5f5;
+            color: white;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+            .search-box button:hover {
+                background-color: #1e88e5;
+            }
+</style>
+
+<div class="header">
+    <h1>Новости</h1>
+    <p>Актуальная информация для старшего поколения Саратовской области</p>
+</div>
+
+<div class="search-box">
+    <form method="get">
+        <input type="text" name="Search" placeholder="Поиск..." />
+        <button type="submit">Найти</button>
+    </form>
+</div>
+
+<div class="layout">
+
+    <!-- КАТЕГОРИИ -->
+    <div class="categories">
+        <h4>Категории</h4>
+
+        <a class="category-link" href="/Account/News">Все</a>
+
+        @foreach (var cat in Model.Categories)
+        {
+            <a class="category-link" href="/Account/News?SelectedCategory=@cat">
+                @cat
+            </a>
+        }
+    </div>
+
+    <!-- НОВОСТИ -->
+    <div class="news-container">
+
+        @foreach (var news in Model.NewsList)
+        {
+            <div class="news-card">
+
+                <div class="news-img-wrapper">
+                    @if (!string.IsNullOrEmpty(news.ImageUrl))
+                    {
+                        <img src="@news.ImageUrl" />
+                    }
+                </div>
+
+                <div class="news-content">
+                    <h3>@news.Title</h3>
+                    <small>@news.PublishDate.ToShortDateString()</small>
+
+                    <p>@news.Description</p>
+
+                    <p class="text-muted">
+                        <strong>Категория:</strong> @news.Category
+                    </p>
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div> *@
+
+@* @page
+@model SeniorCenterWebApp.Pages.Account.NewsModel
+
+<!-- HEADER -->
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Новости</h1>
+        <p class="lead text-muted fs-5">
+            Актуальная информация для старшего поколения Саратовской области
+        </p>
+    </div>
+
+    <div class="search-box text-center mb-4">
+        <form method="get">
+            <input type="text" name="Search" placeholder="Поиск..." />
+            <button type="submit">Найти</button>
+        </form>
+    </div>
+
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="categories">
+
+        <h4>Категории</h4>
+
+        <!-- ВСЕ -->
+        <a class="category-link @(string.IsNullOrEmpty(Model.SelectedCategory) ? "active" : "")"
+           href="/Account/News">
+            Все
+        </a>
+
+        @foreach (var cat in Model.Categories)
+        {
+            <a class="category-link @(Model.SelectedCategory == cat ? "active" : "")"
+               href="/Account/News?SelectedCategory=@cat">
+                @cat
+            </a>
+        }
+
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="news-container">
+
+        @foreach (var news in Model.NewsList)
+        {
+            <div class="news-card">
+
+                <div class="news-img-wrapper">
+                    @if (!string.IsNullOrEmpty(news.ImageUrl))
+                    {
+                        <img src="@news.ImageUrl" />
+                    }
+                </div>
+
+                <div class="news-content">
+
+                    <h5 class="text-primary fs-4 mb-2">
+                        @news.Title
+                    </h5>
+
+                    <small class="text-muted d-block mb-2">
+                        @news.PublishDate.ToShortDateString()
+                    </small>
+
+                    <p>
+                        @news.Description
+                    </p>
+
+                    <p class="text-muted">
+                        Категория: @news.Category
+                    </p>
+
+                </div>
+
+            </div>
+        }
+
+    </main>
+
+</div>
+
+<style>
+
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* LAYOUT */
+    .layout {
+        display: flex;
+        width: 100%;
+    }
+
+    /* SIDEBAR КАК КАРТОЧКА */
+    .categories {
+        width: 260px;
+        background-color: #0d47a1;
+        color: white;
+        padding: 20px;
+        border-radius: 15px; /* ✔ закругление */
+        margin: 20px 0 20px 20px; /* отступы как у карточек */
+
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        display: flex;
+        flex-direction: column;
+    }
+
+        .categories h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+    /* LINK */
+    .category-link {
+        display: block;
+        margin-bottom: 10px;
+        color: white;
+        text-decoration: none;
+        padding: 8px 10px;
+        border-radius: 8px;
+        transition: 0.2s;
+    }
+
+        /* HOVER */
+        .category-link:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* АКТИВНАЯ КАТЕГОРИЯ */
+        .category-link.active {
+            background-color: #ffffff;
+            color: #0d47a1;
+            font-weight: 600;
+        }
+
+    /* CONTENT */
+    .news-container {
+        flex: 1;
+        padding: 20px;
+    }
+
+    /* CARD */
+    .news-card {
+        display: flex;
+        gap: 20px;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    /* IMAGE */
+    .news-img-wrapper {
+        width: 280px;
+        height: 280px;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+        .news-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    /* SEARCH */
+    .search-box input {
+        width: 300px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .search-box button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        background-color: #42a5f5;
+        color: white;
+        font-weight: 600;
+        margin-left: 10px;
+    }
+
+        .search-box button:hover {
+            background-color: #1e88e5;
+        }
+
+</style>
+ *@
+
+@page
+@model SeniorCenterWebApp.Pages.Account.NewsModel
+@{
+    ViewData["Title"] = "Новости";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f1f5fe;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* ========================= HERO ========================= */
+
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto 30px;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-top: 12px;
+        }
+
+    /* ========================= SEARCH ========================= */
+
+    .search-box {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
+
+        .search-box input {
+            width: 320px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid #dbe6ff;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            margin-left: 10px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            border: none;
+            background: #3884ff;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            .search-box button:hover {
+                background: #0041aa;
+            }
+
+    /* ========================= LAYOUT ========================= */
+
+    .layout {
+        display: flex;
+        gap: 20px;
+    }
+
+    /* ========================= SIDEBAR ========================= */
+
+    .categories {
+        width: 260px;
+        background: #1c41b0;
+        color: white;
+        padding: 20px;
+        border-radius: 18px;
+        height: fit-content;
+    }
+
+        .categories h4 {
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+    .category-link {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 12px;
+        color: white;
+        text-decoration: none;
+        margin-bottom: 8px;
+        transition: 0.2s;
+        font-weight: 600;
+    }
+
+        .category-link:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .category-link.active {
+            background: #fff;
+            color: #1c41b0;
+        }
+
+    /* ========================= NEWS ========================= */
+
+    .news-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .news-card {
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        display: flex;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        border: 1px solid #e7eef8;
+        transition: 0.2s;
+    }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .news-img {
+        width: 280px;
+        min-width: 280px;
+        height: 220px;
+        object-fit: cover;
+        background: #f1f5fe;
+    }
+
+    .news-content {
+        padding: 18px;
+    }
+
+    .news-title {
+        font-size: 22px;
+        font-weight: 800;
+        color: #1c41b0;
+        margin-bottom: 8px;
+    }
+
+    .news-date {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 10px;
+    }
+
+    .news-desc {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .news-category {
+        font-size: 14px;
+        font-weight: 600;
+        color: #3884ff;
+    }
+
+    /* ========================= BUTTONS ========================= */
+
+    .bottom-buttons {
+        display: flex;
+        gap: 16px;
+        margin-top: 40px;
+    }
+
+    .btn-modern {
+        flex: 1;
+        padding: 14px;
+        border-radius: 14px;
+        text-align: center;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 18px;
+        transition: 0.2s;
+        background: #3884ff;
+        color: #fff;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+        }
+
+    .btn-secondary {
+        background: #ccdbff;
+        color: #1c41b0;
+    }
+
+        .btn-secondary:hover {
+            background: #dbe6ff;
+        }
+
+</style>
+
+<div class="page">
+
+    <!-- HERO -->
+    <div class="hero-modern">
+        <h1>Новости</h1>
+        <p>Актуальная информация для старшего поколения</p>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <form method="get">
+            <input type="text" name="Search" placeholder="Поиск новостей..." />
+            <button type="submit">Найти</button>
+        </form>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+        <aside class="categories">
+
+            <h4>Категории</h4>
+
+            <a class="category-link @(string.IsNullOrEmpty(Model.SelectedCategory) ? "active" : "")"
+               href="/Account/News">
+                Все
+            </a>
+
+            @foreach (var cat in Model.Categories)
+            {
+                <a class="category-link @(Model.SelectedCategory == cat ? "active" : "")"
+                   href="/Account/News?SelectedCategory=@cat">
+                    @cat
+                </a>
+            }
+
+        </aside>
+
+        <!-- NEWS -->
+        <main class="news-container">
+
+            @foreach (var news in Model.NewsList)
+            {
+                <div class="news-card">
+
+                    @if (!string.IsNullOrEmpty(news.ImageUrl))
+                    {
+                        <img class="news-img" src="@news.ImageUrl" />
+                    }
+
+                    <div class="news-content">
+
+                        <div class="news-title">@news.Title</div>
+
+                        <div class="news-date">
+                            @news.PublishDate.ToShortDateString()
+                        </div>
+
+                        <div class="news-desc">
+                            @news.Description
+                        </div>
+
+                        <div class="news-category">
+                            Категория: @news.Category
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </main>
+
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="bottom-buttons">
+
+        <a class="btn-modern btn-secondary" asp-page="/Account/AntiMoshenniki">
+            Назад
+        </a>
+
+        <a class="btn-modern" asp-page="/Index">
+            На главную
+        </a>
+
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+﻿@* @page "{activityId:int}"
+@model SeniorCenterWebApp.Pages.Account.EnrollModel
+@{
+    ViewData["Title"] = "Запись";
+}
+<h2>Запись на занятие</h2>
+
+<p>Занятие: @Model.Activity.ActivityName</p>
+<p>Место: @Model.Activity.Venue</p>
+<p>День: @Model.Activity.ActivityDay</p>
+<p>Время: @Model.Activity.Time</p>
+
+<form method="post">
+    <input type="hidden" asp-for="ActivityId" />
+    <div>
+        <label for="PreferredDay">Удобный день:</label>
+        <input type="text" id="PreferredDay" name="PreferredDay" />
+    </div>
+    <div>
+        <label for="PreferredTime">Удобное время:</label>
+        <input type="text" id="PreferredTime" name="PreferredTime" />
+    </div>
+   @*  <button type="submit">Записаться</button> *@
+   @*  <div class="text-center mb-5">
+        <a href="/Account/Proverka" class="btn btn-primary btn-lg shadow-lg px-4 py-3" style="border-radius: 50px; font-weight: 600;">
+            Записаться1 <i class="bi bi-arrow-right-circle ms-2"></i>
+        </a>
+    </div>
+</form> *@ 

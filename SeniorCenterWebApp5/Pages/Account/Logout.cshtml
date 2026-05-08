@@ -1,0 +1,37 @@
+﻿@* @page
+@model SeniorCenterWebApp.Pages.Account.LogoutModel
+@{
+    ViewData["Title"] = "Выход";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Вы успешно вышли из системы.</p>
+ *@
+
+@page
+@model SeniorCenterWebApp.Pages.Account.LogoutModel
+@{
+    ViewData["Title"] = "Выход";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h1 class="card-title mb-4">@ViewData["Title"]</h1>
+                    <p class="card-text text-success">
+                        <i class="bi bi-check-circle-fill fs-1"></i><br />
+                        Вы успешно вышли из системы.
+                    </p>
+                    <hr />
+                    <p class="text-muted small">
+                        Для продолжения работы войдите снова.
+                    </p>
+                    <a href="/Account/Login" class="btn btn-primary mt-3">Войти снова</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

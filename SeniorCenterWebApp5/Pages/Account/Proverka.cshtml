@@ -1,0 +1,21 @@
+﻿@* @page
+@model SeniorCenterWebApp.Pages.Account.ProverkaModel
+@{
+    ViewData["Title"] = "Проверка записи";
+}
+
+<h2>Запись успешно подтверждена!</h2>
+
+@if (Model.Activity != null)
+{
+    <p>Занятие: @Model.Activity.ActivityName</p>
+    <p>Место проведения: @Model.Activity.Venue</p>
+    <p>День: @Model.Activity.ActivityDay</p>
+    <p>Время: @Model.Activity.Time</p>
+}
+else
+{
+    <p class="text-danger">Информация о занятии недоступна.</p>
+}
+
+<a href="/Account/CenterInfo" class="btn btn-secondary">Вернуться в центр</a> *@

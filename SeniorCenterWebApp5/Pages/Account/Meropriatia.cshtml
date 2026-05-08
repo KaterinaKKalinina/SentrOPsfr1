@@ -1,0 +1,1031 @@
+﻿
+@* @page
+@model SeniorCenterWebApp.Pages.Account.MeropriatiaModel
+@{
+    ViewData["Title"] = "Мероприятия";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Мероприятия</h1>
+        <p class="lead text-muted fs-5">
+            Здесь вы можете выбрать интересующее вас мероприятие, записаться и следить за свободными местами.
+        </p>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-info fs-5">
+            @Model.Message
+        </div>
+    }
+
+    <!-- Фильтр по району без кнопки -->
+    <form method="get" id="districtForm" class="mb-4 text-center">
+        <label class="form-label fw-bold me-2 fs-5">Фильтр по району:</label>
+        <select asp-for="SelectedDistrict" asp-items="@(new SelectList(Model.Districts.Prepend("Все")))"
+                class="form-select d-inline-block w-50 fs-5 py-2" onchange="this.form.submit()">
+        </select>
+    </form>
+
+    <div class="row g-4">
+        @foreach (var m in Model.Meroprs)
+        {
+            var taken = m.UserMeroprs.Count;
+            var free = m.MaxParticipants - taken;
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded-3">
+                    @if (!string.IsNullOrEmpty(m.ImageUrl))
+                    {
+                        <img class="card-img-top rounded-3" src="@m.ImageUrl" style="height:220px; object-fit:cover;" alt="@m.Title">
+                    }
+                    <div class="card-body d-flex flex-column fs-5">
+                        <!-- Заголовок по центру -->
+                        <h5 class="card-title text-primary fs-4 text-center">@m.Title</h5>
+                        <!-- Описание по центру -->
+                        <p class="card-text description text-center">@m.Description</p>
+
+                        <!-- Остальной текст по левому краю -->
+                        <div class="text-start mt-2">
+                            <p class="card-text">
+                                <i class="bi bi-geo-alt-fill icon me-2"></i>@m.District
+                            </p>
+                            <p class="card-text">
+                                <i class="bi bi-calendar-event icon me-2"></i>
+                                @(m.EventDate?.ToString("dd MMMM yyyy") ?? m.DayOfWeek)
+                                <br />
+                                <i class="bi bi-clock-fill icon me-2"></i>
+                                @(m.EventTime?.ToString(@"hh\:mm") ?? "-")
+                            </p>
+                            <p class="card-text"><strong>Свободные места:</strong> @free из @m.MaxParticipants</p>
+                        </div>
+
+                        <form method="post" asp-page-handler="Register" class="mt-auto">
+                            <input type="hidden" name="meroprId" value="@m.Id" />
+                            <button type="submit" class="btn btn-primary @(free == 0 ? "disabled" : "") fs-5 py-2">
+                                Записаться
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Основной стиль карточек */
+    .card {
+        border-radius: 15px;
+        background-color: #ffffff;
+    }
+
+    /* Заголовок по центру */
+    .card-title {
+        font-weight: 600;
+        text-align: center;
+    }
+
+    /* Описание по центру и серым цветом */
+    .card-text.description {
+        color: #6c757d; /* серый Bootstrap */
+        text-align: center;
+    }
+
+    /* Иконки серого цвета */
+    .card-text .icon {
+        color: #6c757d;
+    }
+
+    /* Остальные параграфы по левому краю */
+    .card-body .text-start p {
+        margin-bottom: 0.75rem;
+    }
+
+    /* Кнопка "Записаться" */
+    .btn-primary {
+        background-color: #42a5f5;
+        border-color: #42a5f5;
+        font-weight: 600;
+    }
+
+        .btn-primary:hover {
+            background-color: #1e88e5;
+            border-color: #1e88e5;
+        }
+
+    .alert-info {
+        background-color: #bbdefb;
+        border-color: #90caf9;
+        color: #0d47a1;
+    }
+
+    /* Увеличенный шрифт для выпадающего списка */
+    select.form-select {
+        font-size: 1.2rem;
+    }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+}
+
+
+
+ *@
+
+@* @page
+@model SeniorCenterWebApp.Pages.Account.MeropriatiaModel
+@{
+    ViewData["Title"] = "Мероприятия";
+}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Мероприятия</h1>
+        <p class="lead text-muted fs-5">
+            Здесь вы можете выбрать интересующее вас мероприятие, записаться и следить за свободными местами.
+        </p>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-info fs-5">
+            @Model.Message
+        </div>
+    }
+
+    <!-- ФИЛЬТР -->
+    <form method="get" id="districtForm" class="mb-4 text-center">
+        <label class="form-label fw-bold me-2 fs-5">Фильтр по району:</label>
+        <select asp-for="SelectedDistrict"
+                asp-items="@(new SelectList(Model.Districts.Prepend("Все")))"
+                class="form-select d-inline-block w-50 fs-5 py-2"
+                onchange="this.form.submit()">
+        </select>
+    </form>
+
+    <!-- КАРТОЧКИ -->
+    <div class="row g-4">
+
+        @foreach (var m in Model.Meroprs)
+        {
+            var taken = m.UserMeroprs.Count;
+            var free = m.MaxParticipants - taken;
+
+            <div class="col-md-4 d-flex">
+
+                <div class="card shadow-sm border-0 rounded-3 w-100">
+
+                    @if (!string.IsNullOrEmpty(m.ImageUrl))
+                    {
+                        <img class="card-img-top rounded-3"
+                             src="@m.ImageUrl"
+                             style="height:220px; object-fit:cover;" />
+                    }
+
+                    <div class="card-body d-flex flex-column fs-5 h-100">
+
+                        <h5 class="card-title text-primary fs-4 text-center">
+                            @m.Title
+                        </h5>
+
+                        <p class="card-text description text-center text-muted">
+                            @m.Description
+                        </p>
+
+                        <div class="text-start mt-2">
+                            <p class="card-text">
+                                <i class="bi bi-geo-alt-fill icon me-2"></i>@m.District
+                            </p>
+
+                            <p class="card-text">
+                                <i class="bi bi-calendar-event icon me-2"></i>
+                                @(m.EventDate?.ToString("dd MMMM yyyy") ?? m.DayOfWeek)
+                                <br />
+                                <i class="bi bi-clock-fill icon me-2"></i>
+                                @(m.EventTime?.ToString(@"hh\:mm") ?? "-")
+                            </p>
+
+                            <p class="card-text">
+                                <strong>Свободные места:</strong> @free из @m.MaxParticipants
+                            </p>
+                        </div>
+
+                        <form method="post"
+                              asp-page-handler="Register"
+                              class="mt-auto text-center">
+
+                            <input type="hidden" name="meroprId" value="@m.Id" />
+
+                            <button type="submit"
+                                    class="btn btn-primary w-100 @(free == 0 ? "disabled" : "") fs-5 py-2 px-4">
+                                Записаться
+                            </button>
+                       
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+    <!-- КНОПКА ДАЛЕЕ -->
+    <div class="text-center mt-5">
+        <a href="/Account/CenterInfo"
+           class="btn btn-primary btn-lg shadow-lg px-5 py-3"
+           style="border-radius: 50px; font-weight: 600;">
+            Далее <i class="bi bi-arrow-right-circle ms-2"></i>
+        </a>
+    </div>
+
+</div>
+
+<style>
+    .card {
+        border-radius: 15px;
+        background-color: #ffffff;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .card-text.description {
+        text-align: center;
+        color: #6c757d;
+    }
+
+    .card-body .text-start p {
+        margin-bottom: 0.75rem;
+    }
+
+    .icon {
+        color: #6c757d;
+    }
+
+    .btn-primary {
+        background-color: #42a5f5;
+        border-color: #42a5f5;
+        font-weight: 600;
+    }
+
+        .btn-primary:hover {
+            background-color: #1e88e5;
+            border-color: #1e88e5;
+        }
+
+    .alert-info {
+        background-color: #bbdefb;
+        border-color: #90caf9;
+        color: #0d47a1;
+    }
+
+    select.form-select {
+        font-size: 1.2rem;
+    }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+} *@
+
+
+@* @page
+@model SeniorCenterWebApp.Pages.Account.MeropriatiaModel
+@{
+    ViewData["Title"] = "Мероприятия";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* ========================= HERO ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto 30px;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+    /* ========================= FILTER ========================= */
+    .filter-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 16px;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+        .filter-box label {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1c41b0;
+            margin-right: 10px;
+        }
+
+        .filter-box select {
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid #dbe6ff;
+            font-size: 18px;
+        }
+
+    /* ========================= GRID ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    /* ========================= CARD ========================= */
+    .event-card {
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        transition: 0.2s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .event-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .event-img {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+    }
+
+    .event-body {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .event-title {
+        font-size: 22px;
+        font-weight: 800;
+        color: #1c41b0;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .event-desc {
+        text-align: center;
+        color: #6b7280;
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .event-info {
+        font-size: 18px;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+        .event-info b {
+            color: #1c41b0;
+        }
+
+    /* ========================= BUTTON ========================= */
+    .btn-modern {
+        margin-top: auto;
+        width: 100%;
+        padding: 14px;
+        border-radius: 14px;
+        background: #3884ff;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        border: none;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+            transform: translateY(-2px);
+        }
+
+        .btn-modern:disabled {
+            background: #aab6d6;
+            cursor: not-allowed;
+        }
+
+    /* ========================= MESSAGE ========================= */
+    .message {
+        background: #e8f0ff;
+        border: 1px solid #cfe0ff;
+        color: #1c41b0;
+        padding: 16px;
+        border-radius: 14px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+</style>
+
+<div class="page">
+
+    <!-- HERO -->
+    <div class="hero-modern">
+        <h1>Мероприятия</h1>
+        <p>Выберите интересное событие и запишитесь онлайн</p>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="message">
+            @Model.Message
+        </div>
+    }
+
+    <!-- FILTER -->
+    <div class="filter-box">
+        <form method="get">
+            <label>Фильтр по району:</label>
+            <select asp-for="SelectedDistrict"
+                    asp-items="@(new SelectList(Model.Districts.Prepend("Все")))"
+                    onchange="this.form.submit()">
+            </select>
+        </form>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="grid">
+
+        @foreach (var m in Model.Meroprs)
+        {
+            var taken = m.UserMeroprs.Count;
+            var free = m.MaxParticipants - taken;
+
+            <div class="event-card">
+
+                @if (!string.IsNullOrEmpty(m.ImageUrl))
+                {
+                    <img class="event-img" src="@m.ImageUrl" />
+                }
+
+                <div class="event-body">
+
+                    <div class="event-title">@m.Title</div>
+
+                    <div class="event-desc">@m.Description</div>
+
+                    <div class="event-info">📍 <b>Район:</b> @m.District</div>
+
+                    <div class="event-info">
+                        📅 <b>Дата:</b> @(m.EventDate?.ToString("dd MMMM yyyy") ?? m.DayOfWeek)
+                    </div>
+
+                    <div class="event-info">
+                        ⏰ <b>Время:</b> @(m.EventTime?.ToString(@"hh\:mm") ?? "-")
+                    </div>
+
+                    <div class="event-info">
+                        👥 <b>Свободно:</b> @free из @m.MaxParticipants
+                    </div>
+
+                    <form method="post" asp-page-handler="Register">
+                        <input type="hidden" name="meroprId" value="@m.Id" />
+
+                        <button class="btn-modern"
+                                type="submit"
+                                disabled="@(free == 0 ? "disabled" : null)">
+                            @(free == 0 ? "Нет мест" : "Записаться")
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <!-- BUTTON -->
+    <div style="text-align:center; margin-top:40px;">
+        <a href="/Account/CenterInfo"
+           class="btn-modern"
+           style="display:inline-block; width:auto; padding:14px 40px; border-radius:50px;">
+            Далее →
+        </a>
+    </div>
+
+</div>
+ *@
+
+@page
+@model SeniorCenterWebApp.Pages.Account.MeropriatiaModel
+@{
+    ViewData["Title"] = "Мероприятия";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f1f5fe;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* ========================= HERO (как на главной) ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto 30px;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-top: 12px;
+        }
+
+
+
+
+    /* ========================= FILTER ========================= */
+    .filter-chips {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .chip {
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid #dbe6ff;
+        color: #1c41b0;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+        .chip:hover {
+            transform: translateY(-2px);
+            background: #eaf0ff;
+        }
+
+        .chip.active {
+            background: #1c41b0;
+            color: #fff;
+        }
+
+
+
+
+
+
+    /* ========================= GRID ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    /* ========================= CARD ========================= */
+    .card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        transition: 0.25s;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.12);
+        }
+
+    .card-img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .title {
+        font-size: 22px;
+        font-weight: 800;
+        color: #1c41b0;
+        text-align: center;
+    }
+
+    .desc {
+        text-align: center;
+        color: #6b7280;
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    /* ========================= BADGE ========================= */
+    .badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        margin: 0 auto 10px;
+    }
+
+    .today {
+        background: #fbe9ec;
+        color: #af1c33;
+    }
+
+    .soon {
+        background: #dbeafe;
+        color: #1c41b0;
+    }
+
+    /* ========================= INFO ========================= */
+    .info {
+        font-size: 16px;
+        margin-bottom: 6px;
+        color: #333;
+    }
+
+        .info b {
+            color: #1c41b0;
+        }
+
+    
+    /* ========================= BUTTON (ИЗОЛИРОВАНО ОТ САЙТА) ========================= */
+    .btn-event {
+        margin-top: auto;
+        width: 100%;
+        padding: 14px;
+        border-radius: 14px;
+        background: #3884ff;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .btn-event:hover {
+            background: #0041aa;
+        }
+
+        .btn-event:disabled {
+            background: #aab6d6;
+            cursor: not-allowed;
+        }
+
+    /* ========================= BUTTON MODERN ========================= */
+    .btn-modern {
+        display: block;
+        width: 100%;
+        margin-top: 30px;
+        padding: 14px 16px;
+        background: #3884ff;
+        color: #fff;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+            color: #fff;
+        }
+
+    .bottom-buttons {
+        display: flex;
+        gap: 16px;
+        margin-top: 40px;
+    }
+
+        /* обе кнопки одинаковой ширины */
+        .bottom-buttons .btn-modern {
+            flex: 1;
+            margin-top: 0;
+        }
+
+    /* вторичная кнопка */
+    .btn-secondary {
+        background: #ccdbff;
+        color: #1c41b0;
+        border: 1px solid #dbe6ff;
+    }
+
+        .btn-secondary:hover {
+            background: #dbe6ff;
+            color: #1c41b0;
+        }
+
+</style>
+
+<div class="page">
+
+    <!-- HERO -->
+    <div class="hero-modern">
+        <h1>Мероприятия</h1>
+        <p>Выбирайте события и записывайтесь онлайн</p>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div style="
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            background: #fbe3e7;
+            color: #6b111f;
+            border: 1px solid #f19fac;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        ">
+            @Model.Message
+        </div>
+    }
+
+    <!-- FILTER -->
+   
+ @*    <div class="filter-chips">
+        <a class="chip @(string.IsNullOrEmpty(Model.SelectedDistrict) || Model.SelectedDistrict == "Все" ? "active" : "")"
+           href="?SelectedDistrict=Все">Все</a>
+
+        @foreach (var d in Model.Districts)
+        {
+            <a class="chip @(Model.SelectedDistrict == d ? "active" : "")"
+               href="?SelectedDistrict=@d">@d</a>
+        }
+    </div> *@
+    <!-- FILTER BY DISTRICT -->
+    <div class="filter-chips">
+        <a class="chip @(string.IsNullOrEmpty(Model.SelectedDistrict) || Model.SelectedDistrict == "Все" ? "active" : "")"
+           href="?SelectedDistrict=Все&SelectedTimeFilter=@Model.SelectedTimeFilter">
+            Все
+        </a>
+
+        @foreach (var d in Model.Districts)
+        {
+            <a class="chip @(Model.SelectedDistrict == d ? "active" : "")"
+               href="?SelectedDistrict=@d&SelectedTimeFilter=@Model.SelectedTimeFilter">
+                @d
+            </a>
+        }
+    </div>
+
+    <!-- FILTER BY TIME -->
+    <div class="filter-chips">
+
+        <a class="chip @(Model.SelectedTimeFilter == "Все" ? "active" : "")"
+           href="?SelectedTimeFilter=Все&SelectedDistrict=@Model.SelectedDistrict">
+            Все
+        </a>
+
+        <a class="chip @(Model.SelectedTimeFilter == "Сегодня" ? "active" : "")"
+           href="?SelectedTimeFilter=Сегодня&SelectedDistrict=@Model.SelectedDistrict">
+            Сегодня
+        </a>
+
+        <a class="chip @(Model.SelectedTimeFilter == "Завтра" ? "active" : "")"
+           href="?SelectedTimeFilter=Завтра&SelectedDistrict=@Model.SelectedDistrict">
+            Завтра
+        </a>
+
+        <a class="chip @(Model.SelectedTimeFilter == "7дней" ? "active" : "")"
+           href="?SelectedTimeFilter=7дней&SelectedDistrict=@Model.SelectedDistrict">
+            До 7 дней
+        </a>
+
+        <a class="chip @(Model.SelectedTimeFilter == "Скоро" ? "active" : "")"
+           href="?SelectedTimeFilter=Скоро&SelectedDistrict=@Model.SelectedDistrict">
+            Скоро
+        </a>
+
+        <a class="chip @(Model.SelectedTimeFilter == "Прошло" ? "active" : "")"
+           href="?SelectedTimeFilter=Прошло&SelectedDistrict=@Model.SelectedDistrict">
+            Прошедшие
+        </a>
+
+        <a class="chip @(Model.SelectedTimeFilter == "По дням недели" ? "active" : "")"
+           href="?SelectedTimeFilter=По дням недели&SelectedDistrict=@Model.SelectedDistrict">
+            По дням недели
+        </a>
+
+    </div>
+
+    <!-- GRID -->
+    <div class="grid">
+
+        @foreach (var m in Model.Meroprs)
+        {
+            var taken = m.UserMeroprs.Count;
+            var free = m.MaxParticipants - taken;
+
+
+            string statusText = "";
+            string statusClass = "";
+
+            if (m.EventDate.HasValue)
+            {
+                var today = DateTime.Today;
+                var date = m.EventDate.Value.Date;
+                var diff = (date - today).Days;
+
+                if (diff < 0)
+                {
+                    statusText = "Прошло";
+                    statusClass = "soon";
+                }
+                else if (diff == 0)
+                {
+                    statusText = "Сегодня";
+                    statusClass = "today";
+                }
+                else if (diff == 1)
+                {
+                    statusText = "Завтра";
+                    statusClass = "today";
+                }
+                else if (diff <= 7)
+                {
+                    statusText = $"Через {diff} дн.";
+                    statusClass = "soon";
+                }
+                else
+                {
+                    statusText = "Скоро";
+                    statusClass = "soon";
+                }
+            }
+
+            <div class="card">
+
+                @if (!string.IsNullOrEmpty(m.ImageUrl))
+                {
+                    <img class="card-img" src="@m.ImageUrl" />
+                }
+
+                <div class="card-body">
+
+                 
+                    @if (!string.IsNullOrEmpty(statusText))
+                    {
+                        <div class="badge @statusClass">@statusText</div>
+                    }
+
+                    <div class="title">@m.Title</div>
+                    <div class="desc">@m.Description</div>
+
+                    <div class="info">📍 <b>Район:</b> @m.District</div>
+
+                
+                    @if (m.EventDate.HasValue)
+                    {
+                        <div class="info">
+                            📅 <b>Дата:</b> @m.EventDate.Value.ToString("dd MMMM yyyy")
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="info">
+                            📅 <b>День недели:</b> @m.DayOfWeek
+                        </div>
+                    }
+
+
+                    <div class="info">
+                        ⏰ <b>Время:</b> @(m.EventTime?.ToString(@"hh\:mm") ?? "-")
+                    </div>
+
+                    <div class="info">
+                        👥 <b>Свободно:</b> @free из @m.MaxParticipants
+                    </div>
+
+                    <!-- КНОПКА НЕ ТРОГАЕМ -->
+                 @*    <form method="post" asp-page-handler="Register">
+                        <input type="hidden" name="meroprId" value="@m.Id" />
+
+                        <button class="btn-event"
+                                type="submit"
+                                disabled="@(free == 0 ? "disabled" : null)">
+                            @(free == 0 ? "Мест нет" : "Записаться")
+                        </button>
+                    </form> *@
+                    @if (m.EventDate.HasValue && m.EventDate.Value.Date < DateTime.Today)
+                    {
+                        <div style="text-align:center; color:#888; font-weight:600; margin-top:10px;">
+                            Мероприятие завершено
+                        </div>
+                    }
+                    else
+                    {
+                        <form method="post" asp-page-handler="Register">
+                            <input type="hidden" name="meroprId" value="@m.Id" />
+
+                            <button class="btn-event"
+                                    type="submit"
+                                    disabled="@(free == 0 ? "disabled" : null)">
+                                @(free == 0 ? "Мест нет" : "Записаться")
+                            </button>
+                        </form>
+                    }
+
+                </div>
+            </div>
+
+
+        }
+
+      
+
+    </div>
+
+    <div class="bottom-buttons">
+
+        <a class="btn-modern btn-secondary" asp-page="/Index">
+            На главную
+        </a>
+
+        <a class="btn-modern" asp-page="/Account/HobbyTest">
+            Далее
+        </a>
+
+    </div>
+
+</div>
+

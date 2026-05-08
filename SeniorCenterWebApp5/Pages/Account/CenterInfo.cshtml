@@ -1,0 +1,984 @@
+﻿
+@* 
+@page
+@using Microsoft.AspNetCore.Authorization
+
+
+
+@model CenterInfoModel
+@{
+    ViewData["Title"] = "Информация о центре";
+}
+<!-- Основной фон и центрирование -->
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-primary">Информация о центре</h1>
+        <p class="lead text-muted mt-3">
+            Центр общения старшего поколения — место, где пожилые люди могут общаться,<br />
+            участвовать в занятиях по интересам, получать психологическую и социальную поддержку.<br />
+            Наша цель — создать тёплую, безопасную и активную среду для общения и развития.
+        </p>
+    </div>
+
+    <!-- Раздел "Чем мы занимаемся" -->
+    <div class="card shadow-sm mb-5 p-4 rounded-3 bg-light">
+        <h2 class="h3 mb-3 text-secondary"><i class="bi bi-people-fill me-2"></i>Чем мы занимаемся</h2>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="bi bi-calendar-event-fill text-primary me-2"></i>Клубные встречи и творческие мастер-классы</li>
+            <li class="list-group-item"><i class="bi bi-activity text-primary me-2"></i>Физические упражнения и прогулки на свежем воздухе</li>
+            <li class="list-group-item"><i class="bi bi-heart-fill text-primary me-2"></i>Психологическая поддержка и консультации</li>
+            <li class="list-group-item"><i class="bi bi-laptop-fill text-primary me-2"></i>Обучающие занятия по цифровой грамотности</li>
+        </ul>
+    </div>
+
+    <!-- Галерея изображений -->
+    <section class="row g-4 mb-5">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-3">
+                <img src="@Url.Content("/photo/Инф_о_центре_ТАНЦЫ.png")" class="card-img-top img-fluid rounded-3" style="max-height:420px; object-fit:cover;" alt="Группа пожилых людей на занятии" />
+                <div class="card-body p-3">
+                    <p class="card-text text-center text-muted">Мастер-класс по танцам для участников центра.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-3">
+                <img src="@Url.Content("/photo/Инф_о_центре_СИДЯТ.png")" class="card-img-top img-fluid rounded-3" style="max-height:420px; object-fit:cover;" alt="Две женщины разговаривают за чаепитием" />
+                <div class="card-body p-3">
+                    <p class="card-text text-center text-muted">Дружеские беседы за чаем и обмен опытом.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты и расписание -->
+    <div class="card shadow-sm p-4 rounded-3 bg-light">
+        <h2 class="h3 mb-3 text-secondary"><i class="bi bi-geo-alt-fill me-2"></i>Контакты и расписание</h2>
+        <p class="mb-2"><i class="bi bi-geo-alt-fill me-2"></i>Адрес: 410004, Саратовская область, г. Саратов, ул. Е.И. Пугачева, д.11/13</p>
+        <p class="mb-2"><i class="bi bi-telephone-fill me-2"></i>Телефон: +7 (800) 100-00-01</p>
+        <p class="mb-2"><i class="bi bi-clock-fill me-2"></i>Работаем: Пн-Чт 08:00-17:00, Пт 08:00-16:00</p>
+    </div>
+
+
+    <div class="text-center mb-5">
+      
+        <a href="/Account/Meropriatia" class="btn btn-primary btn-lg shadow-lg px-4 py-3" style="border-radius: 50px; font-weight: 600;">
+            Далее <i class="bi bi-arrow-right-circle ms-2"></i>
+        </a>
+    </div>
+</div>
+
+
+
+<!-- Подключение Bootstrap и Bootstrap Icons -->
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+} *@
+
+
+@* @page
+@using Microsoft.AspNetCore.Authorization
+
+@model CenterInfoModel
+@{
+    ViewData["Title"] = "Информация о центре";
+}
+
+<style>
+    .btn-next {
+        width: 450px; /* делаем кнопку шире */
+        border-radius: 50px;
+        font-weight: 600;
+    }
+
+    .next-wrapper {
+        margin-top: 50px; /* отступ вниз */
+        text-align: center;
+    }
+</style>
+
+<!-- Основной фон и центрирование -->
+<div class="container py-5">
+
+    <div class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-primary">Информация о центре</h1>
+        <p class="lead text-muted mt-3">
+            Центр общения старшего поколения — место, где пожилые люди могут общаться,<br />
+            участвовать в занятиях по интересам, получать психологическую и социальную поддержку.<br />
+            Наша цель — создать тёплую, безопасную и активную среду для общения и развития.
+        </p>
+    </div>
+
+    <!-- Раздел "Чем мы занимаемся" -->
+
+    <div class="card shadow-sm mb-5 p-4 rounded-3 bg-light">
+        <h2 class="h3 mb-3 text-secondary text-center">
+            <i class="bi bi-people-fill me-2"></i>Чем мы занимаемся
+        </h2>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="bi bi-calendar-event-fill text-primary me-2"></i>Клубные встречи и творческие мастер-классы</li>
+            <li class="list-group-item"><i class="bi bi-activity text-primary me-2"></i>Физические упражнения и прогулки на свежем воздухе</li>
+            <li class="list-group-item"><i class="bi bi-heart-fill text-primary me-2"></i>Психологическая поддержка и консультации</li>
+            <li class="list-group-item"><i class="bi bi-laptop-fill text-primary me-2"></i>Обучающие занятия по цифровой грамотности</li>
+        </ul>
+    </div>
+
+    <!-- Галерея -->
+    <section class="row g-4 mb-5">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-3">
+                <img src="@Url.Content("/photo/Инф_о_центре_ТАНЦЫ.png")"
+                     class="card-img-top img-fluid rounded-3"
+                     style="max-height:420px; object-fit:cover;" />
+                <div class="card-body p-3">
+                    <p class="card-text text-center text-muted">
+                        Мастер-класс по танцам для участников центра.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-3">
+                <img src="@Url.Content("/photo/Инф_о_центре_СИДЯТ.png")"
+                     class="card-img-top img-fluid rounded-3"
+                     style="max-height:420px; object-fit:cover;" />
+                <div class="card-body p-3">
+                    <p class="card-text text-center text-muted">
+                        Дружеские беседы за чаем и обмен опытом.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <div class="card shadow-sm p-4 rounded-3 bg-light">
+        <h2 class="h3 mb-3 text-secondary text-center">
+            <i class="bi bi-geo-alt-fill me-2"></i>Контакты и расписание
+        </h2>
+
+        <p class="mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i>Адрес: 410004, Саратовская область, г. Саратов, ул. Е.И. Пугачева, д.11/13</p>
+        <p class="mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i>Телефон: +7 (800) 100-00-01</p>
+        <p class="mb-2"><i class="bi bi-clock-fill text-primary me-2"></i>Работаем: Пн-Чт 08:00-17:00, Пт 08:00-16:00</p>
+    </div>
+
+    <!-- КНОПКА ДАЛЕЕ -->
+    <div class="next-wrapper">
+        <a href="/Account/Meropriatia"
+           class="btn btn-primary btn-lg shadow-lg btn-next">
+            Далее <i class="bi bi-arrow-right-circle ms-2"></i>
+        </a>
+    </div>
+
+</div>
+
+<!-- Bootstrap Icons -->
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+} *@
+
+
+
+@* @page
+@model CenterInfoModel
+@{
+    ViewData["Title"] = "Информация о центре";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+                   HERO
+            ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 38px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 15px auto 0;
+            line-height: 1.6;
+        }
+
+    /* =========================
+                   СЕКЦИИ
+            ========================= */
+    .section {
+        margin-top: 30px;
+    }
+
+    .section-title {
+        font-size: 34px;
+        font-weight: 900;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    /* =========================
+                   КАРТОЧКИ
+            ========================= */
+    .card-modern {
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        padding: 25px;
+        margin-bottom: 20px;
+    }
+
+        .card-modern p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+    /* =========================
+                   СПИСОК
+            ========================= */
+    .list-modern {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .list-modern li {
+            background: #eef3ff;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+    /* =========================
+                   ГАЛЕРЕЯ
+            ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .img-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+        .img-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .img-card p {
+            padding: 12px;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+    /* =========================
+                   КНОПКА
+            ========================= */
+    .btn-modern {
+        display: block;
+        width: 100%;
+        margin-top: 15px;
+        padding: 14px;
+        background: #3884ff;
+        color: #fff;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+        }
+
+</style>
+
+<!-- ========================= HERO ========================= -->
+<div class="hero-modern">
+
+    <h1>Информация о центре</h1>
+
+    <p>
+        Центр общения старшего поколения — это пространство, где люди «серебряного» возраста могут общаться, развиваться и получать поддержку. Наша миссия — создать комфортную и активную среду для жизни, общения и развития.
+    </p>
+
+</div>
+
+<div class="page">
+
+    <!-- ========================= ЧЕМ ЗАНИМАЕМСЯ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Чем мы занимаемся</div>
+
+        <div class="card-modern">
+            <ul class="list-modern">
+                <li>Клубные встречи и творческие мастер-классы</li>
+                <li>Физическая активность и прогулки</li>
+                <li>Психологическая поддержка</li>
+                <li>Обучение цифровой грамотности</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- ========================= ГАЛЕРЕЯ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Жизнь центра</div>
+
+        <div class="grid">
+
+            <div class="img-card">
+                <img src="/photo/Инф_о_центре_ТАНЦЫ.png" />
+                <p>Творческие занятия и мастер-классы</p>
+            </div>
+
+            <div class="img-card">
+                <img src="/photo/Инф_о_центре_СИДЯТ.png" />
+                <p>Дружеское общение за чаем</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= КОНТАКТЫ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Контакты</div>
+
+        <div class="card-modern">
+            <p>📍 410004, Саратовская область, г. Саратов, ул. Е.И. Пугачева, д.11/13</p>
+            <p>📞 +7 (800) 100-00-01</p>
+            <p>⏰ Пн–Чт 08:00–17:00, Пт 08:00–16:00</p>
+
+            <a class="btn-modern" asp-page="/Account/Meropriatia">
+                Перейти к мероприятиям
+            </a>
+        </div>
+
+    </div>
+
+</div> *@
+
+@* @page
+@model CenterInfoModel
+@{
+    ViewData["Title"] = "Информация о центре";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+                   HERO
+            ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 38px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 15px auto 0;
+            line-height: 1.6;
+        }
+
+    /* =========================
+                   СЕКЦИИ
+            ========================= */
+    .section {
+        margin-top: 30px;
+    }
+
+    .section-title {
+        font-size: 34px;
+        font-weight: 900;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    /* =========================
+                   2 КОЛОНКИ БЛОК
+            ========================= */
+    .two-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    /* =========================
+                   КАРТОЧКИ
+            ========================= */
+    .card-modern {
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        padding: 25px;
+    }
+
+        .card-modern p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+    /* =========================
+                   СПИСОК
+            ========================= */
+    .list-modern {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .list-modern li {
+            background: #eef3ff;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+    /* =========================
+                   ГАЛЕРЕЯ
+            ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .img-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+        .img-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .img-card p {
+            padding: 12px;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+    /* =========================
+                   КНОПКА
+            ========================= */
+    .btn-modern {
+        display: block;
+        width: 100%;
+        margin-top: 15px;
+        padding: 14px;
+        background: #3884ff;
+        color: #fff;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+        }
+
+</style>
+
+<!-- ========================= HERO ========================= -->
+<div class="hero-modern">
+
+    <h1>Информация о центре</h1>
+
+    <p>
+        Центр общения старшего поколения — это пространство, где люди «серебряного» возраста могут общаться, развиваться и получать поддержку.
+        Наша миссия — создать комфортную и активную среду для жизни, общения и развития.
+    </p>
+
+</div>
+
+<div class="page">
+
+    <!-- ========================= 2 КОЛОНКИ: ЧЕМ ЗАНИМАЕМСЯ + ЦЕЛИ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Деятельность центра</div>
+
+        <div class="two-cols">
+
+            <!-- ЧЕМ ЗАНИМАЕМСЯ -->
+            <div class="card-modern">
+                <h3>Чем мы занимаемся</h3>
+                <ul class="list-modern">
+                    <li>Клубные встречи и творческие мастер-классы</li>
+                    <li>Физическая активность и прогулки</li>
+                    <li>Психологическая поддержка</li>
+                    <li>Обучение цифровой грамотности</li>
+                </ul>
+            </div>
+
+            <!-- ЦЕЛИ ЦЕНТРА -->
+            <div class="card-modern">
+                <h3>Цели центра</h3>
+                <ul class="list-modern">
+                    <li>Социальная поддержка пожилых граждан</li>
+                    <li>Развитие творческой активности</li>
+                    <li>Укрепление здоровья и активности</li>
+                    <li>Создание среды общения и дружбы</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= ЖИЗНЬ ЦЕНТРА ========================= -->
+    <div class="section">
+
+        <div class="section-title">Жизнь центра</div>
+
+        <div class="grid">
+
+            <div class="img-card">
+                <img src="/photo/Инф_о_центре_ТАНЦЫ.png" />
+                <p>Творческие занятия и мастер-классы</p>
+            </div>
+
+            <div class="img-card">
+                <img src="/photo/Инф_о_центре_СИДЯТ.png" />
+                <p>Дружеское общение за чаем</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= КОНТАКТЫ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Контакты</div>
+
+        <div class="card-modern">
+            <p>📍 410004, Саратовская область, г. Саратов, ул. Е.И. Пугачева, д.11/13</p>
+            <p>📞 +7 (800) 100-00-01</p>
+            <p>⏰ Пн–Чт 08:00–17:00, Пт 08:00–16:00</p>
+
+            <a class="btn-modern" asp-page="/Account/Meropriatia">
+                Перейти к мероприятиям
+            </a>
+        </div>
+
+    </div>
+
+</div> *@
+@page
+@model CenterInfoModel
+@{
+    ViewData["Title"] = "Информация о центре";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* ========================= HERO ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 15px auto 0;
+            line-height: 1.6;
+        }
+
+    /* ========================= СЕКЦИИ ========================= */
+    .section {
+        margin-top: 40px;
+    }
+
+    .section-title {
+        font-size: 36px;
+        font-weight: 900;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* ========================= 2 КОЛОНКИ ========================= */
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .card-modern {
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        padding: 25px;
+    }
+
+    /* ========================= СПИСОК ========================= */
+    .list-modern {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+     
+
+        .list-modern li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #eef3ff;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1c41b0;
+            transition: 0.2s ease;
+        }
+
+            .list-modern li:hover {
+                background: #dbe6ff;
+                transform: translateX(4px);
+            }
+
+    /* ========================= ЖИЗНЬ ЦЕНТРА ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .img-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .img-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* 🔥 ФИКС ОДИНАКОВЫХ КАРТИНОК */
+        .img-card img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .img-card p {
+            padding: 16px;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+    /* ========================= КОНТАКТЫ ========================= */
+    .card-full {
+        background: #fff;
+        border-radius: 16px;
+        padding: 25px;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        margin-top: 20px;
+    }
+
+        .card-full p {
+            font-size: 18px;
+        }
+
+    /* ========================= КНОПКА ========================= */
+    .btn-modern {
+        display: block;
+        width: 100%;
+        margin-top: 15px;
+        padding: 14px 16px;
+        background: #3884ff;
+        color: #fff;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+        }
+
+
+
+</style>
+
+<!-- HERO -->
+<div class="hero-modern">
+    <h1>Информация о центре</h1>
+    <p>
+        Центр общения старшего поколения — пространство для общения, развития и поддержки людей «серебряного» возраста.
+    </p>
+</div>
+
+<div class="page">
+
+    <!-- ========================= 2 БЛОКА ========================= -->
+    <div class="section">
+
+        <div class="grid-2">
+
+            <!-- ЧЕМ МЫ ЗАНИМАЕМСЯ -->
+            <div class="card-modern">
+                <div class="section-title">Чем мы занимаемся</div>
+
+               
+                <ul class="list-modern">
+                    <li>🎨 Клубные встречи и творческие мастер-классы</li>
+                    <li>🚶‍♂️ Физическая активность и прогулки</li>
+                    <li>🧠 Психологическая поддержка</li>
+                    <li>💻 Обучение цифровой грамотности</li>
+                </ul>
+
+            </div>
+
+            <!-- ЦЕЛИ ЦЕНТРА -->
+            <div class="card-modern">
+                <div class="section-title">Цели центра</div>
+
+              
+                <ul class="list-modern">
+                    <li>🤝 Создание комфортной среды общения</li>
+                    <li>💪 Поддержка активного образа жизни</li>
+                    <li>🧩 Развитие социальных навыков</li>
+                    <li>📱 Помощь в адаптации к цифровому миру</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= ЖИЗНЬ ЦЕНТРА ========================= -->
+    <div class="section">
+
+        <div class="section-title">Жизнь центра</div>
+
+        <div class="grid">
+
+            <div class="img-card">
+                <img src="/photo/Инф_о_центре_ТАНЦЫ.png" />
+                <p>Творческие занятия и мастер-классы</p>
+            </div>
+
+            <div class="img-card">
+                <img src="/photo/Инф_о_центре_СИДЯТ.png" />
+                <p>Дружеское общение за чаем</p>
+            </div>
+
+        </div>
+
+    </div>
+
+   
+    <!-- ========================= КОНТАКТЫ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Контакты</div>
+
+        <div class="card-modern">
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+
+                <!-- Адрес -->
+                <div style="background:#f4f7ff; padding:15px; border-radius:12px;">
+                    <div style="font-weight:700; color:#1c41b0; text-align:center;">
+                        📍 Адрес
+                    </div>
+                    <div style="margin-top:5px;">
+                        
+                        <div>
+                            410004, Саратовская область
+                        </div>
+                        <div>
+                            г. Саратов, ул. Е.И. Пугачева, д.11/13
+                        </div>
+                    </div>
+                </div>
+           
+
+
+                <!-- Телефон -->
+                <div style="background:#f4f7ff; padding:15px; border-radius:12px;">
+                    <div style="font-weight:700; color:#1c41b0;  text-align:center;">
+                        📞 Телефон
+                    </div>
+                    <div style="margin-top:5px;">        
+                        <div>
+                            +7 (800) 100-00-01
+                        </div>
+                        <div>
+                            +7 (8452) 37-98-77
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Режим -->
+                <div style="background:#f4f7ff; padding:15px; border-radius:12px;">
+                    <div style="font-weight:700; color:#1c41b0; text-align:center;">
+                        ⏰ Режим работы
+                    </div>
+                    <div style="margin-top:5px;">
+
+                        <div>
+                            Понедельник-четверг: 08:00-17:00
+                        </div>                  
+                        <div>
+                            Пятница: 08:00-16:00
+                        </div>
+                        <div>
+                            Перерыв: 12:00-12:48
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Онлайн -->
+                <div style="background:#f4f7ff; padding:15px; border-radius:12px;">
+                    <div style="font-weight:700; color:#1c41b0; text-align:center;">
+                        🌐 Онлайн
+                    </div>
+
+                    <div style="margin-top:8px; display:flex; flex-direction:column; gap:6px;">
+
+                        <a href="https://vk.com/sfr.saratovskayaoblast"
+                           target="_blank"
+                           style="color:#1c41b0; text-decoration:none; font-weight:600;">
+                            СФР ВКонтакте
+                        </a>
+
+                        <a href="https://sfr.gov.ru/branches/saratov/"
+                           target="_blank"
+                           style="color:#1c41b0; text-decoration:none; font-weight:600;">
+                            Официальный сайт СФР
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- кнопка -->
+            <a class="btn-modern" asp-page="/Account/Meropriatia">
+                Перейти к мероприятиям
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

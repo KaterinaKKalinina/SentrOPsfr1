@@ -1,0 +1,57 @@
+﻿@* @page "{activityId:int}"
+@model SeniorCenterWebApp.Pages.Account.ConfirmationModel
+@{
+    ViewData["Title"] = "Подтверждение записи";
+}
+
+<div class="container d-flex flex-column align-items-center justify-content-center min-vh-100 px-3">
+ *@   @*  <h1 class="display-4 fw-bold text-center mb-4">Подтверждение записи на мероприятие</h1> *@
+    @* <h1 class="display-4 fw-bold text-center mb-4 text-primary">Подтверждение записи на мероприятие</h1>
+
+    @if (Model.Activity != null)
+    {
+        <div class="card shadow-sm rounded-3 p-4 w-100" style="max-width: 600px; background-color: #ffffff;">
+            <div class="card-body text-center">
+                <h4 class="card-title mb-3 text-primary fw-semibold">@Model.Activity.Venue</h4>
+                <p class="mb-2"><strong>Место проведения:</strong> @Model.Activity.Venue</p>
+                <p class="mb-4"><strong>Дата и время:</strong> @Model.Activity.ActivityDay, @Model.Activity.Time</p> *@
+               @*  <form method="post" class="d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-success btn-lg px-5 py-3 fw-semibold shadow hover-scale" style="border-radius: 50px;">
+                        Подтвердить
+                    </button>
+                </form> *@
+            @* </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center w-100" role="alert" style="max-width: 600px;">
+            Информация о мероприятии не найдена.
+        </div>
+    }
+
+    <div class="mt-5 w-100 d-flex justify-content-center">
+        <a href="/Account/HobbyTest" class="btn btn-primary btn-lg px-4 py-3 fw-semibold shadow hover-scale" style="border-radius: 50px; max-width: 300px; width: 100%;">
+            Далее <i class="bi bi-arrow-right-circle ms-2"></i>
+        </a>
+    </div>
+</div>
+
+
+<style>
+    .hover-scale:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
+</style> *@
+
+
+
+
+
+
+
+
+
+
+

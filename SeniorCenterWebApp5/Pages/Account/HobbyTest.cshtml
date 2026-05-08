@@ -1,0 +1,496 @@
+﻿@* @page
+@model SeniorCenterWebApp.Pages.Account.HobbyTestModel
+@{
+    ViewData["Title"] = "Тест на хобби, которое вам больше всего подходит";
+}
+<style>
+    /* Общие стили */
+    body {
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background: var(--primary-3);
+        color: #0b0b0b;
+        padding: 2rem;
+        line-height: 1.6;
+    }
+
+    /* Заголовок */
+    h2 {
+        text-align: center;
+        color: var(--primary-1);
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    /* Форма */
+    form {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #f0f8ff;
+        padding: 30px 40px;
+        border-radius: var(--card-radius);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+        form:hover {
+            transform: translateY(-2px);
+        }
+
+    /* Вопросы */
+    .question {
+        background-color: #ffffff;
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        transition: box-shadow 0.3s, background-color 0.3s;
+    }
+
+        .question:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            background-color: #e6f0fa;
+        }
+
+        .question p {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #003366;
+        }
+
+    input[type="radio"] {
+        accent-color: #0066cc;
+        margin-right: 12px;
+        cursor: pointer;
+    }
+
+    label {
+        font-size: 1rem;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    /* Линия между вопросами */
+    hr {
+        border: none;
+        height: 3px;
+        background-color: #0066cc;
+        opacity: 0.2;
+        margin: 40px 0;
+        border-radius: 1.5px;
+    }
+
+    /* Кнопки */
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 40px;
+    }
+
+    button, a.btn {
+        padding: 14px 28px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        button:hover, a.btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .btn-retry {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+        .btn-retry:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-next {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+        .btn-next:hover {
+            background-color: #1e7e34;
+        }
+
+    /* Результат */
+    .result-container {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+        .result-container h3 {
+            font-size: 2.5rem;
+            color: #0066cc;
+            margin-bottom: 25px;
+        }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.Result == null)
+{
+    <form method="post" id="hobbyForm">
+        @for (int i = 0; i < Model.Questions.Count; i++)
+        {
+            <div class="question">
+                <p>@(i + 1). @Model.Questions[i].QuestionText</p>
+                @foreach (var answer in Model.Questions[i].Answers)
+                {
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio"
+                               id="q@i-@answer.AnswerText"
+                               name="Answers[@i]"
+                               value="@answer.AnswerType"
+                               required />
+                        <label class="form-check-label" for="q@i-@answer.AnswerText">@answer.AnswerText</label>
+                    </div>
+                }
+            </div>
+            @if (i < Model.Questions.Count - 1)
+            {
+                <hr />
+            }
+        }
+        <div class="buttons">
+            <button type="submit" class="btn-retry">Показать результат</button>
+        </div>
+    </form>
+}
+else
+{
+    <div class="result-container" id="resultSection">
+        <h3>Ваше подходящее хобби: @Model.Result</h3>
+        <div class="buttons">
+            <a href="javascript:location.reload()" class="btn btn-retry">Пройти заново</a>
+            <a href="/Account/AntiMoshenniki" class="btn btn-next">Далее</a>
+            
+        </div>
+    </div>
+}
+
+<script>
+    // Плавное скроллирование к результату
+    document.addEventListener('DOMContentLoaded', () => {
+        if (@(Model.Result != null ? "true" : "false")) {
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+</script> *@
+
+@page
+@model SeniorCenterWebApp.Pages.Account.HobbyTestModel
+@{
+    ViewData["Title"] = "Тест на хобби";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f1f5fe;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* ========================= HERO ========================= */
+
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto 30px;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-top: 12px;
+        }
+
+    /* ========================= FORM ========================= */
+
+    .test-form {
+        background: #fff;
+        border-radius: 24px;
+        padding: 35px;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    /* ========================= QUESTION ========================= */
+
+    .question {
+        background: #f8fbff;
+        border: 1px solid #dbe6ff;
+        border-radius: 18px;
+        padding: 24px;
+        margin-bottom: 22px;
+        transition: 0.2s ease;
+    }
+
+        .question:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+        }
+
+    .question-title {
+        font-size: 24px;
+        font-weight: 800;
+        color: #1c41b0;
+        margin-bottom: 18px;
+    }
+
+    /* ========================= ANSWERS ========================= */
+
+    .answer-option {
+        background: #fff;
+        border: 1px solid #dbe6ff;
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        transition: 0.2s ease;
+    }
+
+        .answer-option:hover {
+            background: #eef4ff;
+            border-color: #2f6bff;
+        }
+
+    .form-check-input {
+        transform: scale(1.3);
+        margin-right: 12px;
+        cursor: pointer;
+    }
+
+    .form-check-label {
+        font-size: 18px;
+        cursor: pointer;
+        color: #222;
+    }
+
+    /* ========================= BUTTONS ========================= */
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 35px;
+    }
+
+    .btn-modern {
+        padding: 14px 28px;
+        background: #3884ff;
+        color: #fff;
+        border-radius: 14px;
+        border: none;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 700;
+        transition: 0.2s ease;
+        cursor: pointer;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+    .btn-secondary-modern {
+        background: #eef3ff;
+        color: #1c41b0;
+    }
+
+        .btn-secondary-modern:hover {
+            background: #dbe6ff;
+            color: #1c41b0;
+        }
+
+    /* ========================= RESULT ========================= */
+
+    .result-card {
+        background: #fff;
+        border-radius: 24px;
+        padding: 40px;
+        text-align: center;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+        .result-card h2 {
+            font-size: 38px;
+            color: #1c41b0;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+    .result-text {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+</style>
+
+<div class="page">
+
+    <!-- HERO -->
+@*     <div class="hero-modern">
+        <h1>Тест на подбор хобби</h1>
+        <p>
+            Ответьте на несколько вопросов и узнайте,
+            какое занятие подойдет вам лучше всего
+        </p>
+    </div> *@
+    @if (Model.Result == null)
+    {
+        <!-- HERO показываем только ДО результата -->
+        <div class="hero-modern">
+            <h1>Тест на подбор хобби</h1>
+            <p>
+                Ответьте на несколько вопросов и узнайте,
+                какое занятие подойдет вам лучше всего
+            </p>
+        </div>
+    }
+
+    @if (Model.Result == null)
+    {
+        <form method="post" class="test-form">
+
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                <div class="question">
+
+                    <div class="question-title">
+                        @(i + 1). @Model.Questions[i].QuestionText
+                    </div>
+
+                    @foreach (var answer in Model.Questions[i].Answers)
+                    {
+                        <div class="answer-option">
+
+                            <div class="form-check">
+
+                                <input class="form-check-input"
+                                       type="radio"
+                                       id="q@i-@answer.AnswerText"
+                                       name="Answers[@i]"
+                                       value="@answer.AnswerType"
+                                       required />
+
+                                <label class="form-check-label"
+                                       for="q@i-@answer.AnswerText">
+                                    @answer.AnswerText
+                                </label>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            }
+
+            <div class="buttons">
+
+                <button type="submit" class="btn-modern">
+                    Показать результат
+                </button>
+
+                <a asp-page="/Index" class="btn-modern btn-secondary-modern">
+                    На главную
+                </a>
+
+            </div>
+
+        </form>
+    }
+    else
+    {
+        <div class="result-card" id="resultSection">
+
+            <h2>Ваш результат</h2>
+
+            <div class="result-text">
+                Подходящее хобби:
+            </div>
+
+            <div style="
+                    font-size: 32px;
+                    font-weight: 900;
+                    color: #2f6bff;
+                    margin-top: 10px;
+                ">
+                @Model.Result
+            </div>
+
+            <div class="buttons">
+
+                <a href="javascript:location.reload()"
+                   class="btn-modern">
+                    Пройти заново
+                </a>
+
+                <a asp-page="/Account/AntiMoshenniki"
+                   class="btn-modern">
+                    Далее
+                </a>
+
+                <a asp-page="/Index"
+                   class="btn-modern btn-secondary-modern">
+                    На главную
+                </a>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        if (@(Model.Result != null ? "true" : "false")) {
+
+            document
+                .getElementById('resultSection')
+                .scrollIntoView({
+                    behavior: 'smooth'
+                });
+        }
+    });
+</script>
+
+
+
+
+
+
+
+

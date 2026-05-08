@@ -1,0 +1,457 @@
+﻿
+
+
+@* @page
+@model SeniorCenterWebApp.Pages.Account.AntiMoshennikiModel
+@{
+    ViewData["Title"] = "Противодействие мошенничеству";
+}
+<style>
+    /* Изменение стиля h2 */
+    h2 {
+       
+        color: #153084;
+    }
+    /* Цвет ссылок внизу */
+    .bottom-links a {
+        color: #000000;
+    }
+</style>
+<div class="container py-5 bg-light rounded shadow-sm">
+    <h1 class="text-center mb-4 display-3 fw-bold text-primary">
+        <i class="bi me-3"></i> Как защититься от мошенников
+    </h1>
+    <p class="lead text-center mb-5 text-muted">
+        <i class="bi me-2"></i> Мошенники используют различные схемы для обмана и выманивания денег. Ниже представлены самые распространённые схемы и советы по их распознаванию.
+    </p>
+
+    <!-- Распространённые схемы -->
+    <section class="mb-5">
+        <h2 class="mb-4 border-bottom pb-2 d-flex align-items-center">
+            <i class="bi me-3"></i> Наиболее распространённые схемы мошенничества
+        </h2>
+        <div class="row g-4 mt-3">
+            <div class="col-md-6">
+                <div class="card h-100 border-primary shadow-sm">
+                    <div class="card-body d-flex align-items-start">
+                        <i class="bi bi-envelope-fill text-primary fs-3 me-3"></i>
+                        <div>
+                            <h5 class="card-title mb-2">Фишинг</h5>
+                            <p class="card-text mb-0">попытки заставить вас раскрыть личные данные через поддельные сайты или письма.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-primary shadow-sm">
+                    <div class="card-body d-flex align-items-start">
+                        <i class="bi bi-telephone-fill text-primary fs-3 me-3"></i>
+                        <div>
+                            <h5 class="card-title mb-2">Мошенничество по телефону</h5>
+                            <p class="card-text mb-0">звонки от "представителей банка" или "правоохранительных органов", требующие деньги или личные данные.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-primary shadow-sm">
+                    <div class="card-body d-flex align-items-start">
+                        <i class="bi bi-shield-lock-fill text-primary fs-3 me-3"></i>
+                        <div>
+                            <h5 class="card-title mb-2">Поддельные интернет-магазины</h5>
+                            <p class="card-text mb-0">сайты, предлагающие товары по очень низким ценам, но не выполняющие доставку.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-primary shadow-sm">
+                    <div class="card-body d-flex align-items-start">
+                        <i class="bi bi-trophy-fill text-primary fs-3 me-3"></i>
+                        <div>
+                            <h5 class="card-title mb-2">Лотереи и выигрыши</h5>
+                            <p class="card-text mb-0">уведомления о выигрыше и требования оплатить "налог" или "комиссию".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-primary shadow-sm">
+                    <div class="card-body d-flex align-items-start">
+                        <i class="bi bi-people-fill text-primary fs-3 me-3"></i>
+                        <div>
+                            <h5 class="card-title mb-2">Манипуляции в соцсетях</h5>
+                            <p class="card-text mb-0">мошенники создают фальшивые аккаунты для обмана.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Что делать -->
+    <section class="mb-5">
+        <h2 class="mb-4 border-bottom pb-2 d-flex align-items-center">
+            <i class="bi bi-shield-check-fill me-3"></i> Что делать, чтобы защититься
+        </h2>
+        <ul class="list-group list-group-flush mt-3">
+            <li class="list-group-item"><i class="bi bi-lock-fill text-primary me-2"></i> Не раскрывайте личную информацию и пароли.</li>
+            <li class="list-group-item"><i class="bi bi-search-heart-fill text-primary me-2"></i> Проверяйте сайты и контакты на подлинность.</li>
+            <li class="list-group-item"><i class="bi  bi-info-circle-fill text-primary me-2"></i> Не переводите деньги незнакомым людям или по сомнительным схемам.</li>
+            <li class="list-group-item"><i class="bi bi-telephone-fill text-primary me-2"></i> Обращайтесь в официальные службы при подозрениях.</li>
+        </ul>
+    </section>
+
+    <!-- Видео -->
+    <section class="mb-5">
+        <h2 class="mb-4 border-bottom pb-2 d-flex align-items-center">
+            <i class="bi me-3"></i> Видео: Как распознать мошенничество
+        </h2>
+        <div class="d-flex justify-content-center">
+            <video class="w-75 rounded shadow" controls>
+                <source src="@Url.Content("/photo/video_protiv1.mp4")" type="video/mp4" />
+                Ваш браузер не поддерживает тег видео.
+            </video>
+        </div>
+    </section>
+
+    <!-- Полезные ресурсы -->
+    <section>
+        <h2 class="mb-4 border-bottom pb-2 d-flex align-items-center">
+            <i class="bi me-3"></i> Полезные ресурсы
+        </h2>
+        <ul class="list-unstyled mt-3 bottom-links">
+            <li class="mb-2">
+                <a href="https://sfr.gov.ru/projects/moshenniki_v_socialnom_sektore/?sortbydate=up" class="text-decoration-none fs-5">
+                    <i class="bi bi-link-45deg me-2"></i> Социальный фонд России предлагает ознакомиться с типичными схемами мошенников
+                </a>
+            </li>
+       
+            <li class="mb-2">
+                <a href="/pdf_ckach/ПДФ_Против_Мошенников_читать.pdf" class="text-decoration-none fs-5" download>
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Скачать инструкцию (PDF)
+                </a>
+            </li>
+        </ul>
+    </section>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+}
+ *@
+
+@page
+@model SeniorCenterWebApp.Pages.Account.AntiMoshennikiModel
+@{
+    ViewData["Title"] = "Защита от мошенников";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f1f5fe;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* ========================= HERO ========================= */
+
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto 30px;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-top: 12px;
+        }
+
+    /* ========================= SECTION ========================= */
+
+    .section {
+        margin-top: 40px;
+    }
+
+    .section-title {
+        font-size: 34px;
+        font-weight: 900;
+        text-align: center;
+        margin-bottom: 25px;
+        color: #1c41b0;
+    }
+
+    /* ========================= GRID ========================= */
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    /* ========================= CARD ========================= */
+
+    .card-modern {
+        background: #fff;
+        border-radius: 18px;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        padding: 22px;
+        transition: 0.2s;
+    }
+
+        .card-modern:hover {
+            transform: translateY(-4px);
+        }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #1c41b0;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 16px;
+        color: #444;
+        line-height: 1.5;
+    }
+
+    /* ========================= LIST ========================= */
+
+    .list-modern {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .list-modern li {
+            background: #447bff;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+    /* ========================= VIDEO ========================= */
+
+    .video-box {
+        background: #fff;
+        border-radius: 18px;
+        padding: 20px;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+
+    video {
+        width: 100%;
+        max-width: 800px;
+        border-radius: 16px;
+    }
+
+    /* ========================= LINKS ========================= */
+
+    .links {
+        background: #fff;
+        border-radius: 18px;
+        padding: 20px;
+        border: 1px solid #e7eef8;
+    }
+
+        .links a {
+            display: block;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #eef3ff;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #1c41b0;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+            .links a:hover {
+                background: #dbe6ff;
+            }
+
+    /* ========================= BUTTON ========================= */
+
+    .btn-modern {
+        display: block;
+        width: 100%;
+        margin-top: 30px;
+        padding: 14px 16px;
+        background: #3884ff;
+        color: #fff;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+            color: #fff;
+        }
+
+    .bottom-buttons {
+        display: flex;
+        gap: 16px;
+        margin-top: 40px;
+    }
+
+        .bottom-buttons .btn-modern {
+            flex: 1;
+            margin-top: 0;
+        }
+
+    .btn-secondary {
+        background: #ccdbff;
+        color: #1c41b0;
+        border: 1px solid #dbe6ff;
+    }
+
+        .btn-secondary:hover {
+            background: #dbe6ff;
+            color: #1c41b0;
+        }
+
+</style>
+
+<div class="page">
+
+    <!-- HERO -->
+    <div class="hero-modern">
+        <h1>Как защититься от мошенников</h1>
+        <p>Простые правила безопасности, которые помогут не стать жертвой обмана</p>
+    </div>
+
+    <!-- СХЕМЫ -->
+    <div class="section">
+
+        <div class="section-title">Распространённые схемы</div>
+
+        <div class="grid">
+
+            <div class="card-modern">
+                <div class="card-title">📧 Фишинг</div>
+                <div class="card-text">Поддельные сайты и письма, которые крадут личные данные.</div>
+            </div>
+
+            <div class="card-modern">
+                <div class="card-title">📞 Звонки "из банка"</div>
+                <div class="card-text">Мошенники представляются сотрудниками банков или полиции.</div>
+            </div>
+
+            <div class="card-modern">
+                <div class="card-title">🛒 Фейковые магазины</div>
+                <div class="card-text">Сайты с низкими ценами, которые не отправляют товары.</div>
+            </div>
+
+            <div class="card-modern">
+                <div class="card-title">🎁 "Вы выиграли"</div>
+                <div class="card-text">Просят оплатить комиссию за несуществующий выигрыш.</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ЗАЩИТА -->
+    <!-- ЗАЩИТА -->
+    <div class="section">
+
+        <div class="section-title">Как себя защитить</div>
+
+        <ul class="list-modern">
+
+            <li>🔒 Не сообщайте пароли и коды из SMS — даже если звонящий представляется банком или полицией</li>
+
+            <li>🔍 Проверяйте адрес сайта: мошенники часто меняют одну букву (например, sberbank → sberbannk)</li>
+
+            <li>💳 Никогда не переводите деньги «на безопасный счёт» — таких счетов не существует</li>
+
+            <li>📞 Перезванивайте в организацию только по номеру с официального сайта, а не из сообщения или звонка</li>
+
+            <li>⚠️ Если вас торопят или пугают («срочно!», «ваш счёт взломан») — это почти всегда мошенники</li>
+
+            <li>👵 Попросите родственников проверить подозрительное сообщение или звонок, прежде чем что-то делать</li>
+
+        </ul>
+
+    </div>
+
+    <!-- ВИДЕО -->
+    <div class="section">
+
+        <div class="section-title">Обучающее видео</div>
+
+        <div class="video-box">
+            <video controls>
+                <source src="@Url.Content("/photo/video_protiv1.mp4")" type="video/mp4" />
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+
+    </div>
+
+    <!-- РЕСУРСЫ -->
+    <div class="section">
+
+        <div class="section-title">Полезные ресурсы</div>
+
+        <div class="links">
+
+            <a href="https://sfr.gov.ru/projects/moshenniki_v_socialnom_sektore/?sortbydate=up" target="_blank">
+                🔗 Схемы мошенников от СФР
+            </a>
+
+            <a href="/pdf_ckach/ПДФ_Против_Мошенников_читать.pdf" download>
+                📄 Скачать инструкцию (PDF)
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- КНОПКИ -->
+    <div class="bottom-buttons">
+
+        <a class="btn-modern btn-secondary" asp-page="/Index">
+            На главную
+        </a>
+
+        <a class="btn-modern" asp-page="/Account/News">
+            Далее
+        </a>
+
+    </div>
+
+</div>
+

@@ -1,0 +1,2708 @@
+﻿@* 
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+    Layout = "_Layout";
+}
+
+<!-- Героический блок с фоном, заголовком и CTA -->
+<div class="hero bg-light text-center py-5 position-relative overflow-hidden">
+    <!-- Используем Bootstrap классы для фона и позиционирования -->
+    <div class="hero-inner mx-auto max-width-1100 px-4">
+        <!-- Центрированный внутренний контейнер с максимальной шириной -->
+        <div class="card-hero p-4 shadow rounded">
+            <h1 class="display-4 fw-bold mb-3">Центр общения <span class="text-primary">старшего поколения</span></h1>
+            <!-- Заголовок с выделением цвета -->
+            <div class="subtitle mb-4 fs-4 text-muted">отделение по Саратовской области</div>
+            <!-- Подзаголовок -->
+
+            <p class="lead mb-4">
+                
+                Поддержка людей «серебряного» возраста – одно из приоритетных направлений работы центров общения старшего поколения.
+                
+            </p>
+
+            <!-- Кнопки CTA (регистрация, вход, выход) -->
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                @if (!(User?.Identity?.IsAuthenticated ?? false))
+                {
+                    <!-- Если пользователь не авторизован -->
+                    <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register">Зарегистрироваться</a>
+                    <a class="btn btn-outline-secondary btn-lg" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+                }
+                else
+                {
+                    <!-- Если пользователь авторизован -->
+                    <!-- Можно добавить персональные ссылки, например, профиль -->
+                    <a class="btn btn-outline-primary btn-lg" asp-area="Identity" asp-page="/Account/Register">Профиль</a>
+     /*поменяит мб*/
+                    <form asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger btn-lg">Выйти</button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Основные информационные блоки с иконками и изображениями -->
+<section class="container mt-5">
+    <div class="row g-4">
+        <!-- Блок 1: преимущества или особенности сайта -->
+        <div class="col-md-6">
+            <div class="card h-100 p-4 shadow-sm rounded border-0">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:50px; height:50px;">
+                        <i class="bi bi-people-fill fs-4"></i>
+                        <!-- Иконка Bootstrap Icons -->
+                    </div>
+                    <h5 class="mb-0">Сообщество</h5>
+                </div>
+                <p>Объединяет людей с общими интересами, чтобы делиться опытом и получать поддержку.</p>
+            </div>
+        </div>
+        <!-- Блок 2: преимущества или особенности сайта -->
+        <div class="col-md-6">
+            <div class="card h-100 p-4 shadow-sm rounded border-0">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:50px; height:50px;">
+                        <i class="bi bi-chat-dots-fill fs-4"></i>
+                    </div>
+                    <h5 class="mb-0">Общение</h5>
+                </div>
+                <p>Интерактивные чаты, форумы и мероприятия для активного взаимодействия.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Раздел с новостями или актуальной информацией -->
+<section class="container mt-5">
+    <h2 class="mb-4 text-center">Это интересно!</h2>
+    <div class="row g-4">
+        <!-- Карточка новости 1 -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm rounded">
+                <img src="/photo/Главная_707.jpg" class="card-img-top" alt="Новость 1" />
+                <div class="card-body">
+                    <h5 class="card-title">Новость 1</h5>
+                    <p class="card-text">С 1 января 2025 года продолжается работа по созданию центров общения старшего поколения на базе клиентских служб отделений Фонда в рамках реализации федерального проекта «Старшее поколение», входящего в национальный проект «Семья», и государственной программы Российской Федерации «Социальная поддержка граждан».</p>
+                    <a href="/Account/News" class="btn btn-primary">Подробнее</a> 
+                </div>
+            </div>
+        </div>
+        <!-- Карточка новости 2 -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm rounded">
+                <img src="/photo/Главная_85.jpg" class="card-img-top" alt="Новость 2" />
+                <div class="card-body">
+                    <h5 class="card-title">Новость 2</h5>
+                    <p class="card-text">В преддверии Нового года на базе клиентской службы СФР в Энгельсском районе Саратовской области открылся Центр общения старшего поколения. Для нашего региона он стал четвертым по счету и очень долгожданным для активных, энергичных и талантливых представителей «серебряного» возраста из Энгельса.</p>
+                    <a href="/Account/Login" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        <!-- Карточка новости 3 -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm rounded">
+                <img src="/photo/Главная_107.jpg" class="card-img-top" alt="Новость 3" />
+                <div class="card-body">
+                    <h5 class="card-title">Новость 3</h5>
+                    <p class="card-text">Это новое пространство для развития, общения, образования и самореализации. Здесь, в наших гостеприимных стенах, представители серебряного возраста могут интересно и полезно провести время, получить новые знания, раскрыть в себе творческие таланты и обрести новых друзей»</p>
+                    <a href="/Account/Login" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Подписка на новости или форма обратной связи -->
+<section class="bg-light py-5 mt-5">
+    <div class="container text-center">
+        <h2>Подписка на новости</h2>
+        <p class="mb-4">Оставайтесь в курсе последних событий, подписавшись на нашу рассылку.</p>
+        <form id="subscribeForm" class="row justify-content-center" style="max-width: 600px;">
+            <div class="col-8 mb-3">
+                <input type="email" class="form-control form-control-lg" placeholder="Ваш email" required />
+            </div>
+            <div class="col-4 mb-3">
+                <button type="submit" class="btn btn-primary btn-lg w-100">Подписаться</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+      window.location.href = 'https://vk.com/sfr.saratovskayaoblast'; 
+    });
+</script>
+
+
+
+
+<!-- Секция с отзывами или кейсами -->
+<section class="container mt-5">
+    <h2 class="mb-4 text-center">Отзывы пользователей</h2>
+    <div class="row g-4">
+        <!-- Отзыв 1 -->
+        <div class="col-md-4">
+            <div class="card h-100 p-3 shadow rounded">
+                <div class="d-flex align-items-center mb-3">
+                 
+                    <div>
+                        <h6 class="mb-0">Иван Иванов</h6>
+                        <small class="text-muted">Пользователь</small>
+                    </div>
+                </div>
+                <p>"Очень доволен сайтом! Помог мне найти новых друзей."</p>
+            </div>
+        </div>
+        <!-- Отзыв 2 -->
+        <div class="col-md-4">
+            <div class="card h-100 p-3 shadow rounded">
+                <div class="d-flex align-items-center mb-3">
+                  
+                    <div>
+                        <h6 class="mb-0">Мария Петрова</h6>
+                        <small class="text-muted">Пользователь</small>
+                    </div>
+                </div>
+                <p>"Очень удобно и просто! Рекомендую всем."</p>
+            </div>
+        </div>
+        <!-- Отзыв 3 -->
+        <div class="col-md-4">
+            <div class="card h-100 p-3 shadow rounded">
+                <div class="d-flex align-items-center mb-3">
+                   
+                    <div>
+                        <h6 class="mb-0">Алексей Смирнов</h6>
+                        <small class="text-muted">Пользователь</small>
+                    </div>
+                </div>
+                <p>"Общение с единомышленниками — отличное занятие."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Подключение JS-библиотек и дополнительных скриптов -->
+@section Scripts {
+    <!-- Подключение Bootstrap JS Bundle (включая Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Можно добавить свои скрипты -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Главная страница загружена');
+            // Можно добавить обработчики событий, анимации и др.
+        });
+    </script>
+} *@
+
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+    Layout = "_Layout";
+}
+
+<style>
+    /* =========================
+           HERO
+        ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #8aa2ec);
+        color: white;
+        padding: 40px;
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+
+        .hero-modern h1 {
+            font-weight: 800;
+        }
+
+    /* =========================
+           ПЛИТКИ РАЗДЕЛОВ
+        ========================= */
+    .section-card {
+        border-radius: 18px;
+        overflow: hidden;
+        transition: 0.25s ease;
+        height: 100%;
+        border: none;
+    }
+
+        .section-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+    .section-img {
+        height: 170px;
+        object-fit: cover;
+    }
+
+    /* =========================
+           ПРОФИЛЬ БЛОКИ
+        ========================= */
+    .profile-card {
+        border-radius: 16px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+        padding: 20px;
+        text-align: center;
+        background: #fff;
+        height: 100%;
+    }
+
+        .profile-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+    .profile-box {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    @@media (max-width: 768px) {
+        .profile-box
+
+    {
+        grid-template-columns: 1fr;
+    }
+
+    }
+</style>
+
+<!-- =========================
+     HERO
+========================= -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>Саратовская область • пространство для общения, развития и поддержки</p>
+</div>
+
+<!-- =========================
+     ПРОФИЛЬ
+========================= -->
+<section class="container mt-4">
+
+    <div class="profile-box">
+
+        @if (!(User?.Identity?.IsAuthenticated ?? false))
+        {
+            <div class="profile-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                <h5>Вход</h5>
+                <p>Войдите, чтобы получить доступ к сервисам</p>
+                <a class="btn btn-primary w-100" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+            </div>
+
+            <div class="profile-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" />
+                <h5>Регистрация</h5>
+                <p>Создайте аккаунт и присоединяйтесь</p>
+                <a class="btn btn-outline-primary w-100" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+            </div>
+        }
+        else
+        {
+            <div class="profile-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                <h5>Профиль</h5>
+                <p>@User.Identity.Name</p>
+                <a class="btn btn-primary w-100" asp-area="Identity" asp-page="/Account/Register">Открыть профиль</a>
+            </div>
+
+            <div class="profile-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828490.png" />
+                <h5>Выход</h5>
+                <p>Завершить сессию</p>
+                <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-danger w-100">Выйти</button>
+                </form>
+            </div>
+        }
+
+    </div>
+
+</section>
+
+<!-- =========================
+     РАЗДЕЛЫ
+========================= -->
+<section class="container mt-5">
+
+    <h2 class="mb-4 fw-bold">Разделы</h2>
+
+    <div class="row g-4">
+
+        <!-- О НАС -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card section-card shadow-sm">
+
+                <img class="section-img"
+                     src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" />
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="fw-bold">О нас</h5>
+                    <p class="text-muted flex-grow-1">
+                        Информация о центре, целях и развитии проекта для старшего поколения.
+                    </p>
+                    <a class="btn btn-primary mt-auto" asp-page="/Account/CenterInfo">
+                        Перейти
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- МЕРОПРИЯТИЯ -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card section-card shadow-sm">
+
+                <img class="section-img"
+                     src="https://images.unsplash.com/photo-1551817958-20204d6ab67a" />
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="fw-bold">Мероприятия</h5>
+                    <p class="text-muted flex-grow-1">
+                        Встречи, занятия, клубы по интересам и активная жизнь центра.
+                    </p>
+                    <a class="btn btn-primary mt-auto" asp-page="/Account/Meropriatia">
+                        Перейти
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- НОВОСТИ -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card section-card shadow-sm">
+
+                <img class="section-img"
+                     src="https://images.unsplash.com/photo-1504711434969-e33886168f5c" />
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="fw-bold">Новости</h5>
+                    <p class="text-muted flex-grow-1">
+                        Свежие события и важные обновления центра.
+                    </p>
+                    <a class="btn btn-primary mt-auto" asp-page="/Account/News">
+                        Перейти
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ТЕСТ -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card section-card shadow-sm">
+
+                <img class="section-img"
+                     src="https://images.unsplash.com/photo-1552581234-26160f608093" />
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="fw-bold">Тест</h5>
+                    <p class="text-muted flex-grow-1">
+                        Определите интересы и подходящие активности.
+                    </p>
+                    <a class="btn btn-primary mt-auto" asp-page="/Account/HobbyTest">
+                        Пройти
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- МОШЕННИКИ -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card section-card shadow-sm">
+
+                <img class="section-img"
+                     src="https://images.unsplash.com/photo-1551434678-e076c223a692" />
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="fw-bold">Противодействие мошенникам</h5>
+                    <p class="text-muted flex-grow-1">
+                        Информация о безопасности и защите от мошенников.
+                    </p>
+                    <a class="btn btn-primary mt-auto" asp-page="/Account/AntiMoshenniki">
+                        Подробнее
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section> *@
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+    Layout = "_Layout";
+}
+
+<style>
+    /* =========================
+            ОБЩИЙ СТИЛЬ СТРАНИЦЫ
+        ========================= */
+    body {
+        background: #f5f7fb;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    /* =========================
+            HERO (как портал)
+        ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #3f6ef7);
+        color: #fff;
+        padding: 50px 40px;
+        border-radius: 24px;
+        margin-top: 20px;
+        box-shadow: 0 10px 40px rgba(28, 65, 176, 0.25);
+    }
+
+        .hero-modern h1 {
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-modern p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+    /* =========================
+            ПРОФИЛЬ БЛОК
+        ========================= */
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 25px;
+    }
+
+    @@media (max-width: 768px) {
+        .profile-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .profile-card {
+        background: #fff;
+        border-radius: 18px;
+        padding: 22px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        transition: 0.25s;
+        border: 1px solid #eef1f6;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.1);
+        }
+
+    .profile-icon {
+        font-size: 34px;
+        margin-bottom: 10px;
+    }
+
+    .profile-card h5 {
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+
+    .profile-card p {
+        color: #6b7280;
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    /* =========================
+            РАЗДЕЛЫ (КАРТОЧКИ)
+        ========================= */
+    .section-title {
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin: 40px 0 20px;
+    }
+
+    .section-card {
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid #eef1f6;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        transition: 0.25s;
+        height: 100%;
+    }
+
+        .section-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+        }
+
+    .section-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .section-body {
+        padding: 18px;
+    }
+
+        .section-body h5 {
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .section-body p {
+            color: #6b7280;
+            font-size: 0.95rem;
+            min-height: 48px;
+        }
+
+    .btn-modern {
+        background: #1c41b0;
+        color: #fff;
+        border-radius: 10px;
+        padding: 8px 14px;
+        display: inline-block;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .btn-modern:hover {
+            background: #153084;
+            color: #fff;
+        }
+
+</style>
+
+<!-- =========================
+    HERO
+========================= -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>Саратовская область • цифровая платформа для общения, развития и поддержки</p>
+</div>
+
+<!-- =========================
+    ПРОФИЛЬ
+========================= -->
+<section class="profile-grid">
+
+    @if (!(User?.Identity?.IsAuthenticated ?? false))
+    {
+        <div class="profile-card">
+            <div class="profile-icon">👤</div>
+            <h5>Вход</h5>
+            <p>Доступ к личному кабинету</p>
+            <a class="btn-modern w-100" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+        </div>
+
+        <div class="profile-card">
+            <div class="profile-icon">📝</div>
+            <h5>Регистрация</h5>
+            <p>Создайте аккаунт за 1 минуту</p>
+            <a class="btn-modern w-100" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+        </div>
+    }
+    else
+    {
+        <div class="profile-card">
+            <div class="profile-icon">👤</div>
+            <h5>Профиль</h5>
+            <p>@User.Identity.Name</p>
+            <a class="btn-modern w-100" asp-area="Identity" asp-page="/Account/Manage/Index">Открыть</a>
+        </div>
+
+        <div class="profile-card">
+            <div class="profile-icon">⚙️</div>
+            <h5>Аккаунт</h5>
+            <p>Настройки профиля</p>
+            <a class="btn-modern w-100" asp-area="Identity" asp-page="/Account/Manage/Index">Перейти</a>
+        </div>
+    }
+
+</section>
+
+<!-- =========================
+    РАЗДЕЛЫ
+========================= -->
+<div class="section-title">Разделы портала</div>
+
+<section class="row g-4">
+
+    <!-- О НАС -->
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="section-card">
+            <img class="section-img" src="/photo/about.jpg" />
+            <div class="section-body">
+                <h5>О нас</h5>
+                <p>Информация о центре, целях и развитии проекта.</p>
+                <a class="btn-modern" asp-page="/Account/CenterInfo">Перейти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- МЕРОПРИЯТИЯ -->
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="section-card">
+            <img class="section-img" src="/photo/events.jpg" />
+            <div class="section-body">
+                <h5>Мероприятия</h5>
+                <p>Встречи, лекции, клубы и активности.</p>
+                <a class="btn-modern" asp-page="/Account/Meropriatia">Перейти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- НОВОСТИ -->
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="section-card">
+            <img class="section-img" src="/photo/news.jpg" />
+            <div class="section-body">
+                <h5>Новости</h5>
+                <p>Актуальные события центра.</p>
+                <a class="btn-modern" asp-page="/Account/News">Перейти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ТЕСТ -->
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="section-card">
+            <img class="section-img" src="/photo/test.jpg" />
+            <div class="section-body">
+                <h5>Тест</h5>
+                <p>Подбор интересов и активностей.</p>
+                <a class="btn-modern" asp-page="/Account/HobbyTest">Пройти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- БЕЗОПАСНОСТЬ -->
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="section-card">
+            <img class="section-img" src="/photo/security.jpg" />
+            <div class="section-body">
+                <h5>Безопасность</h5>
+                <p>Защита от мошенников и рекомендации.</p>
+                <a class="btn-modern" asp-page="/Account/AntiMoshenniki">Открыть</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- РЕГИСТРАЦИЯ -->
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="section-card">
+            <img class="section-img" src="/photo/login.jpg" />
+            <div class="section-body">
+                <h5>Регистрация</h5>
+                <p>Создайте аккаунт для доступа ко всем функциям.</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Создать</a>
+            </div>
+        </div>
+    </div>
+
+</section> *@
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<style>
+
+    /* =========================
+       BASE (портальный стиль)
+    ========================= */
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    /* =========================
+       HERO (как Госуслуги)
+    ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 60px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+    /* =========================
+       WRAPPER
+    ========================= */
+    .page {
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+       PROFILE GRID (ЧИСТЫЙ GRID)
+    ========================= */
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: -40px;
+    }
+
+    /* =========================
+       PROFILE CARD
+    ========================= */
+    .profile-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+        }
+
+    .profile-icon {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .profile-card h5 {
+        font-weight: 700;
+        color: #111; /* ЧЁРНЫЙ как ты просил */
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+    /* =========================
+       TITLE
+    ========================= */
+    .section-title {
+        font-size: 26px;
+        font-weight: 800;
+        margin: 50px 0 20px;
+        color: #111; /* ЧЁРНЫЙ */
+    }
+
+    /* =========================
+       GRID (БЕЗ BOOTSTRAP)
+    ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    /* =========================
+       CARD (Госуслуги стиль)
+    ========================= */
+    .section-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .section-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .section-body {
+        padding: 16px;
+    }
+
+        .section-body h5 {
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #111; /* ЧЁРНЫЙ */
+        }
+
+        .section-body p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+    /* =========================
+       BUTTON (единый стиль)
+    ========================= */
+    .btn-modern {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 9px 14px;
+        background: #1c41b0;
+        color: #fff;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #153084;
+            color: #fff;
+        }
+
+</style>
+
+<!-- ========================= HERO ========================= -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>Саратовская область • цифровая платформа поддержки и развития</p>
+</div>
+
+<div class="page">
+
+    <!-- ========================= PROFILE ========================= -->
+    <div class="profile-grid">
+
+        @if (!(User?.Identity?.IsAuthenticated ?? false))
+        {
+            <div class="profile-card">
+                <div class="profile-icon">👤</div>
+                <h5>Вход</h5>
+                <p>Доступ к сервисам</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-icon">📝</div>
+                <h5>Регистрация</h5>
+                <p>Создание аккаунта</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+            </div>
+        }
+        else
+        {
+            <div class="profile-card">
+                <div class="profile-icon">👤</div>
+                <h5>Профиль</h5>
+                <p>@User.Identity.Name</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Открыть</a>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-icon">⚙️</div>
+                <h5>Аккаунт</h5>
+                <p>Настройки профиля</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Перейти</a>
+            </div>
+        }
+
+    </div>
+
+    <!-- ========================= SECTIONS ========================= -->
+    <div class="section-title">Разделы</div>
+
+    <div class="grid">
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/about.jpg" />
+            <div class="section-body">
+                <h5>О нас</h5>
+                <p>Информация о центре и его миссии</p>
+                <a class="btn-modern" asp-page="/Account/CenterInfo">Перейти</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/events.jpg" />
+            <div class="section-body">
+                <h5>Мероприятия</h5>
+                <p>Встречи, клубы и активности</p>
+                <a class="btn-modern" asp-page="/Account/Meropriatia">Перейти</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/news.jpg" />
+            <div class="section-body">
+                <h5>Новости</h5>
+                <p>События центра</p>
+                <a class="btn-modern" asp-page="/Account/News">Перейти</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/test.jpg" />
+            <div class="section-body">
+                <h5>Тест</h5>
+                <p>Подбор интересов</p>
+                <a class="btn-modern" asp-page="/Account/HobbyTest">Пройти</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/security.jpg" />
+            <div class="section-body">
+                <h5>Безопасность</h5>
+                <p>Защита от мошенников</p>
+                <a class="btn-modern" asp-page="/Account/AntiMoshenniki">Открыть</a>
+            </div>
+        </div>
+
+    </div>
+
+</div> *@
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 60px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+    .page {
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+           GRID (ПРОФИЛЬ)
+        ========================= */
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: -40px;
+    }
+
+    .profile-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+        }
+
+    .profile-icon {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .profile-card h5 {
+        font-weight: 700;
+        color: #111;
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+    /* =========================
+           TITLE
+        ========================= */
+    .section-title {
+        font-size: 26px;
+        font-weight: 800;
+        margin: 50px 0 20px;
+        color: #111;
+    }
+
+    /* =========================
+           GRID (РАЗДЕЛЫ)
+        ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    .section-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .section-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .section-body {
+        padding: 16px;
+    }
+
+        .section-body h5 {
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #111;
+        }
+
+        .section-body p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+    .btn-modern {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 9px 14px;
+        background: #1c41b0;
+        color: #fff;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .btn-modern:hover {
+            background: #153084;
+            color: #fff;
+        }
+
+</style>
+
+<!-- HERO -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>Саратовская область • цифровая платформа поддержки и развития</p>
+</div>
+
+<div class="page">
+
+    <!-- ========================= ПЕРВЫЕ РАЗДЕЛЫ (БЫЛИ ПРОФИЛЬ → СТАЛИ ПЕРВЫМИ) ========================= -->
+    <div class="section-title">Разделы</div>
+
+    <div class="grid">
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/about.jpg" />
+            <div class="section-body">
+                <h5>О нас</h5>
+                <p>Информация о центре и его миссии</p>
+                <a class="btn-modern" asp-page="/Account/CenterInfo">Перейти</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/events.jpg" />
+            <div class="section-body">
+                <h5>Мероприятия</h5>
+                <p>Встречи, клубы и активности</p>
+                <a class="btn-modern" asp-page="/Account/Meropriatia">Перейти</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/news.jpg" />
+            <div class="section-body">
+                <h5>Новости</h5>
+                <p>События центра</p>
+                <a class="btn-modern" asp-page="/Account/News">Перейти</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/test.jpg" />
+            <div class="section-body">
+                <h5>Тест</h5>
+                <p>Подбор интересов</p>
+                <a class="btn-modern" asp-page="/Account/HobbyTest">Пройти</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <img class="section-img" src="/photo/security.jpg" />
+            <div class="section-body">
+                <h5>Безопасность</h5>
+                <p>Защита от мошенников</p>
+                <a class="btn-modern" asp-page="/Account/AntiMoshenniki">Открыть</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ========================= ПРОФИЛЬ (БЫЛИ ВТОРЫМИ → СТАЛИ ВНИЗУ) ========================= -->
+    <div class="section-title">Профиль</div>
+
+    <div class="profile-grid">
+
+        @if (!(User?.Identity?.IsAuthenticated ?? false))
+        {
+            <div class="profile-card">
+                <div class="profile-icon">👤</div>
+                <h5>Вход</h5>
+                <p>Доступ к сервисам</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-icon">📝</div>
+                <h5>Регистрация</h5>
+                <p>Создание аккаунта</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+            </div>
+        }
+        else
+        {
+            <div class="profile-card">
+                <div class="profile-icon">👤</div>
+                <h5>Профиль</h5>
+                <p>@User.Identity.Name</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Открыть</a>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-icon">⚙️</div>
+                <h5>Аккаунт</h5>
+                <p>Настройки профиля</p>
+                <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Перейти</a>
+            </div>
+        }
+
+    </div>
+
+</div> *@
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 60px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+    .page {
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+           ОТСТУПЫ МЕЖДУ СЕКЦИЯМИ
+        ========================= */
+    .section {
+        margin-top: 50px;
+    }
+
+        .section:first-of-type {
+            margin-top: 30px;
+        }
+
+    .section-title {
+        font-size: 26px;
+        font-weight: 800;
+        margin: 0 0 20px;
+        color: #111;
+    }
+
+    /* =========================
+           GRID (РАЗДЕЛЫ)
+        ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    .section-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .section-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .section-body {
+        padding: 16px;
+    }
+
+        .section-body h5 {
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #111;
+        }
+
+        .section-body p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+    /* =========================
+           PROFILE GRID
+        ========================= */
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .profile-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+        }
+
+    .profile-icon {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .profile-card h5 {
+        font-weight: 700;
+        color: #111;
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+    .btn-modern {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 9px 14px;
+        background: #1c41b0;
+        color: #fff;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .btn-modern:hover {
+            background: #153084;
+            color: #fff;
+        }
+
+</style>
+
+<!-- HERO -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>Саратовская область • цифровая платформа поддержки и развития</p>
+</div>
+
+<div class="page">
+
+    <!-- ========================= РАЗДЕЛЫ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Разделы</div>
+
+        <div class="grid">
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/about.jpg" />
+                <div class="section-body">
+                    <h5>О нас</h5>
+                    <p>Информация о центре и его миссии</p>
+                    <a class="btn-modern" asp-page="/Account/CenterInfo">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/events.jpg" />
+                <div class="section-body">
+                    <h5>Мероприятия</h5>
+                    <p>Встречи, клубы и активности</p>
+                    <a class="btn-modern" asp-page="/Account/Meropriatia">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/news.jpg" />
+                <div class="section-body">
+                    <h5>Новости</h5>
+                    <p>События центра</p>
+                    <a class="btn-modern" asp-page="/Account/News">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/test.jpg" />
+                <div class="section-body">
+                    <h5>Тест</h5>
+                    <p>Подбор интересов</p>
+                    <a class="btn-modern" asp-page="/Account/HobbyTest">Пройти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/security.jpg" />
+                <div class="section-body">
+                    <h5>Безопасность</h5>
+                    <p>Защита от мошенников</p>
+                    <a class="btn-modern" asp-page="/Account/AntiMoshenniki">Открыть</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================= ПРОФИЛЬ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Профиль</div>
+
+        <div class="profile-grid">
+
+            @if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Вход</h5>
+                    <p>Доступ к сервисам</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">📝</div>
+                    <h5>Регистрация</h5>
+                    <p>Создание аккаунта</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+                </div>
+            }
+            else
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Профиль</h5>
+                    <p>@User.Identity.Name</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Открыть</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">⚙️</div>
+                    <h5>Аккаунт</h5>
+                    <p>Настройки профиля</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Перейти</a>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div> *@
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    /* =========================
+               HERO (ЦЕНТР КАК ГОСУСЛУГИ)
+        ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 10px;
+            max-width: 800px;
+        }
+
+    .page {
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+               ОТСТУПЫ СЕКЦИЙ
+        ========================= */
+    .section {
+        margin-top: 60px;
+    }
+
+        .section:first-of-type {
+            margin-top: 30px;
+        }
+
+    .section-title {
+        font-size: 26px;
+        font-weight: 800;
+        margin: 0 0 25px;
+        color: #111;
+        text-align: center; /* 🔥 центр заголовков */
+    }
+
+    /* =========================
+               GRID РАЗДЕЛЫ
+        ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    .section-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .section-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .section-body {
+        padding: 16px;
+        text-align: center; /* 🔥 центр текста */
+    }
+
+        .section-body h5 {
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #111;
+        }
+
+        .section-body p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+    /* =========================
+               PROFILE
+        ========================= */
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .profile-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+        }
+
+    .profile-icon {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .profile-card h5 {
+        font-weight: 700;
+        color: #111;
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+    /* =========================
+               BUTTON
+        ========================= */
+    .btn-modern {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 9px 16px;
+        background: #1c41b0;
+        color: #fff;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #153084;
+            color: #fff;
+        }
+
+</style>
+
+<!-- ========================= HERO ========================= -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>отделение по Саратовской области</p>
+    <p>Поддержка людей «серебряного» возраста – одно из приоритетных направлений работы центров общения старшего поколения</p>
+</div>
+
+<div class="page">
+
+    <!-- ========================= РАЗДЕЛЫ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Разделы</div>
+
+        <div class="grid">
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/about.jpg" />
+
+                <div class="section-body">
+                    <h5>О нас</h5>
+                    <p>Информация о центре и его миссии</p>
+                    <a class="btn-modern" asp-page="/Account/CenterInfo">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/events.jpg" />
+                <div class="section-body">
+                    <h5>Мероприятия</h5>
+                    <p>Встречи, клубы и активности</p>
+                    <a class="btn-modern" asp-page="/Account/Meropriatia">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/news.jpg" />
+                <div class="section-body">
+                    <h5>Новости</h5>
+                    <p>События центра</p>
+                    <a class="btn-modern" asp-page="/Account/News">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/test.jpg" />
+                <div class="section-body">
+                    <h5>Тест</h5>
+                    <p>Подбор интересов</p>
+                    <a class="btn-modern" asp-page="/Account/HobbyTest">Пройти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/security.jpg" />
+                <div class="section-body">
+                    <h5>Безопасность</h5>
+                    <p>Защита от мошенников</p>
+                    <a class="btn-modern" asp-page="/Account/AntiMoshenniki">Открыть</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================= ПРОФИЛЬ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Профиль</div>
+
+        <div class="profile-grid">
+
+            @if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Вход</h5>
+                    <p>Доступ к сервисам</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">📝</div>
+                    <h5>Регистрация</h5>
+                    <p>Создание аккаунта</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+                </div>
+            }
+            else
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Профиль</h5>
+                    <p>@User.Identity.Name</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Открыть</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">⚙️</div>
+                    <h5>Аккаунт</h5>
+                    <p>Настройки профиля</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Перейти</a>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div> *@
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    /* =========================
+                   HERO
+            ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 10px;
+            max-width: 800px;
+        }
+
+    .page {
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+               СЕКЦИИ
+            ========================= */
+    .section {
+        margin-top: 60px;
+    }
+
+    .section-title {
+        font-size: 34px; /* 🔥 УВЕЛИЧИЛ */
+        font-weight: 900;
+        margin: 0 0 25px;
+        color: #111;
+        text-align: left; /* 🔥 ВЛЕВО */
+        padding-left: 5px;
+    }
+
+    /* =========================
+               GRID РАЗДЕЛЫ
+            ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    .section-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .section-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .section-body {
+        padding: 16px;
+        text-align: center;
+    }
+
+        .section-body h5 {
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .section-body p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+    /* =========================
+               PROFILE GRID
+            ========================= */
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .profile-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+        }
+
+    .profile-icon {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .profile-card h5 {
+        font-weight: 700;
+        color: #111;
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+    /* =========================
+               BUTTON
+            ========================= */
+    .btn-modern {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 9px 16px;
+        background: #1c41b0;
+        color: #fff;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #153084;
+            color: #fff;
+        }
+
+</style>
+
+<!-- HERO -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>отделение по Саратовской области</p>
+    <p>Поддержка людей «серебряного» возраста – одно из приоритетных направлений работы центров общения старшего поколения</p>
+</div>
+
+<div class="page">
+
+    <!-- ========================= РАЗДЕЛЫ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Разделы</div>
+
+        <div class="grid">
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/about.jpg" />
+                <div class="section-body">
+                    <h5>О нас</h5>
+                    <p>Информация о центре и его миссии</p>
+                    <a class="btn-modern" asp-page="/Account/CenterInfo">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/events.jpg" />
+                <div class="section-body">
+                    <h5>Мероприятия</h5>
+                    <p>Встречи, клубы и активности</p>
+                    <a class="btn-modern" asp-page="/Account/Meropriatia">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/news.jpg" />
+                <div class="section-body">
+                    <h5>Новости</h5>
+                    <p>События центра</p>
+                    <a class="btn-modern" asp-page="/Account/News">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/test.jpg" />
+                <div class="section-body">
+                    <h5>Тест</h5>
+                    <p>Подбор интересов</p>
+                    <a class="btn-modern" asp-page="/Account/HobbyTest">Пройти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/photo/security.jpg" />
+                <div class="section-body">
+                    <h5>Безопасность</h5>
+                    <p>Защита от мошенников</p>
+                    <a class="btn-modern" asp-page="/Account/AntiMoshenniki">Открыть</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================= ПРОФИЛЬ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Профиль</div>
+
+        <div class="profile-grid">
+
+            @if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Вход</h5>
+                    <p>Доступ к сервисам</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">📝</div>
+                    <h5>Регистрация</h5>
+                    <p>Создание аккаунта</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+                </div>
+            }
+            else
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Профиль</h5>
+                    <p>@User.Identity.Name</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Открыть</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">⚙️</div>
+                    <h5>Аккаунт</h5>
+                    <p>Настройки профиля</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Перейти</a>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div> *@
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    /* =========================
+               HERO
+            ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-modern p {
+            font-size: 20px; /* 🔥 было 16px */
+            opacity: 0.95;
+            margin-top: 10px;
+            max-width: 900px;
+            line-height: 1.6;
+        }
+
+    .page {
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+               СЕКЦИИ
+            ========================= */
+    .section {
+        margin-top: 30px; /* 🔥 уменьшен отступ */
+    }
+
+    .section-title {
+        font-size: 34px;
+        font-weight: 900;
+        margin: 0 0 25px;
+        color: #111;
+        text-align: left;
+        padding-left: 5px;
+    }
+
+    /* =========================
+               GRID РАЗДЕЛЫ
+            ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    .section-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .section-img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    .section-body {
+        padding: 16px;
+        text-align: center;
+    }
+
+        .section-body h5 {
+            font-weight: 800;
+            margin-bottom: 6px;
+            font-size: 20px; /* 🔥 добавили */
+        }
+
+        .section-body p {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+    /* =========================
+               PROFILE GRID
+            ========================= */
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .profile-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+        }
+
+    .profile-icon {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .profile-card h5 {
+        font-weight: 700;
+        color: #111;
+    }
+
+    .profile-card p {
+        font-size: 16px;
+        color: #6b7280;
+    }
+
+    /* =========================
+               BUTTON (УВЕЛИЧЕН + FULL WIDTH)
+            ========================= */
+    .btn-modern {
+        display: block;
+        width: 100%; /* 🔥 растягиваем */
+        margin-top: 12px;
+        padding: 14px 16px; /* 🔥 больше кнопка */
+        background: #3884ff;
+        color: #fff;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+            color: #fff;
+        }
+
+</style>
+
+<!-- HERO -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>отделение по Саратовской области</p>
+    <p>Поддержка людей «серебряного» возраста – одно из приоритетных направлений работы центров общения старшего поколения</p>
+</div>
+
+<div class="page">
+
+    <!-- ========================= РАЗДЕЛЫ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Разделы</div>
+
+        <div class="grid">
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/рег11.png" />
+                <div class="section-body">
+                    <h5>Регистрация</h5>
+                    <p>Создание аккаунта</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Зарегистрироваться</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/онас122.png" />
+                <div class="section-body">
+                    <h5>О нас</h5>
+                    <p>Информация о центре и его миссии</p>
+                    <a class="btn-modern" asp-page="/Account/CenterInfo">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/мер1.png" />
+                <div class="section-body">
+                    <h5>Мероприятия</h5>
+                    <p>Встречи, клубы и активности</p>
+                    <a class="btn-modern" asp-page="/Account/Meropriatia">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/нов1.png" />
+                <div class="section-body">
+                    <h5>Новости</h5>
+                    <p>События центра</p>
+                    <a class="btn-modern" asp-page="/Account/News">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/тес3.png" />
+                <div class="section-body">
+                    <h5>Тест</h5>
+                    <p>Подбор интересов</p>
+                    <a class="btn-modern" asp-page="/Account/HobbyTest">Пройти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/мош1.png" />
+                <div class="section-body">
+                    <h5>Безопасность</h5>
+                    <p>Защита от мошенников</p>
+                    <a class="btn-modern" asp-page="/Account/AntiMoshenniki">Открыть</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- ========================= ПРОФИЛЬ ========================= -->
+    <div class="section">
+
+        <div class="section-title">Профиль</div>
+
+        <div class="profile-grid">
+
+            @if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Вход</h5>
+                    <p>Доступ к сервисам</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">📝</div>
+                    <h5>Регистрация</h5>
+                    <p>Создание аккаунта</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+                </div>
+            }
+            else
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Профиль</h5>
+                    <p>@User.Identity.Name</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Открыть</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">⚙️</div>
+                    <h5>Аккаунт</h5>
+                    <p>Настройки профиля</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Перейти</a>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div> *@
+
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #111;
+    }
+
+    .page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px 20px 80px;
+    }
+
+    /* =========================
+                   HERO
+        ========================= */
+    .hero-modern {
+        background: linear-gradient(135deg, #1c41b0, #2f6bff);
+        color: #fff;
+        padding: 70px 40px;
+        border-radius: 24px;
+        margin: 20px auto;
+        max-width: 1310px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+        .hero-modern h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        /* Подзаголовок */
+        .hero-modern p:first-of-type {
+            font-size: 22px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Основной текст */
+        .hero-modern p:last-of-type {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 900px;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+    /* =========================
+                   СЕКЦИИ
+        ========================= */
+    .section {
+        margin-top: 30px;
+    }
+
+    .section-title {
+        font-size: 34px;
+        font-weight: 900;
+        margin-bottom: 25px;
+        color: #111;
+        text-align: left;
+        padding-left: 5px;
+    }
+
+    /* =========================
+                   GRID
+        ========================= */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    .section-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+    .section-img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    .section-body {
+        padding: 16px;
+        text-align: center;
+    }
+
+        .section-body h5 {
+            font-weight: 800;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .section-body p {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+    /* =========================
+                   PROFILE
+        ========================= */
+    .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .profile-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        border: 1px solid #e7eef8;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        transition: 0.2s ease;
+    }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+        }
+
+    .profile-icon {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .profile-card h5 {
+        font-weight: 700;
+        font-size: 20px;
+        color: #111;
+    }
+
+    .profile-card p {
+        font-size: 16px; /* 🔥 исправили */
+        color: #6b7280;
+    }
+
+    /* =========================
+                   BUTTON
+        ========================= */
+    .btn-modern {
+        display: block;
+        width: 100%;
+        margin-top: 12px;
+        padding: 14px 16px;
+        background: #3884ff;
+        color: #fff;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+        .btn-modern:hover {
+            background: #0041aa;
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+   
+    
+
+    
+</style>
+
+<!-- HERO -->
+<div class="hero-modern">
+    <h1>Центр общения старшего поколения</h1>
+    <p>отделение по Саратовской области</p>
+    <p>
+        Поддержка людей «серебряного» возраста – одно из приоритетных направлений работы центров общения старшего поколения
+    </p>
+</div>
+
+<div class="page">
+
+    <!-- РАЗДЕЛЫ -->
+    <div class="section">
+        <div class="section-title">Разделы</div>
+
+        <div class="grid">
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/рег11.png" />
+                <div class="section-body">
+                    <h5>Регистрация</h5>
+                    <p>Создание аккаунта</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Зарегистрироваться</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/онас122.png" />
+                <div class="section-body">
+                    <h5>О нас</h5>
+                    <p>Информация о центре и его миссии</p>
+                    <a class="btn-modern" asp-page="/Account/CenterInfo">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/мер1.png" />
+                <div class="section-body">
+                    <h5>Мероприятия</h5>
+                    <p>Встречи, клубы и активности</p>
+                    <a class="btn-modern" asp-page="/Account/Meropriatia">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/нов1.png" />
+                <div class="section-body">
+                    <h5>Новости</h5>
+                    <p>События центра</p>
+                    <a class="btn-modern" asp-page="/Account/News">Перейти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/тес3.png" />
+                <div class="section-body">
+                    <h5>Тест</h5>
+                    <p>Подбор интересов</p>
+                    <a class="btn-modern" asp-page="/Account/HobbyTest">Пройти</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <img class="section-img" src="/Photo/Главная/мош1.png" />
+                <div class="section-body">
+                    <h5>Безопасность</h5>
+                    <p>Защита от мошенников</p>
+                    <a class="btn-modern" asp-page="/Account/AntiMoshenniki">Открыть</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ПРОФИЛЬ -->
+    <div class="section">
+        <div class="section-title">Профиль</div>
+
+        <div class="profile-grid">
+
+            @if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Вход</h5>
+                    <p>Доступ к сервисам</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Login">Войти</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">📝</div>
+                    <h5>Регистрация</h5>
+                    <p>Создание аккаунта</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+                </div>
+            }
+            else
+            {
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h5>Профиль</h5>
+                    <p>@User.Identity.Name</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Открыть</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-icon">⚙️</div>
+                    <h5>Аккаунт</h5>
+                    <p>Настройки профиля</p>
+                    <a class="btn-modern" asp-area="Identity" asp-page="/Account/Manage/Index">Перейти</a>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>
